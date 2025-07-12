@@ -14,6 +14,7 @@ import AddProducts from "../pages/Admin/AddProducts/AddProducts";
 import Wishlist from "../pages/Wishlist/Wishlist";
 import ProductDetails from "../pages/HomePage/AllProduct/ProductDetails";
 import ConfirmOrder from "../pages/HomePage/AllProduct/ConfirmOrder";
+import ManageOrders from "../pages/Admin/Manage Orders/ManageOrders";
 
 
 export const router = createBrowserRouter([
@@ -67,6 +68,9 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/add-product',
         element: <AddProducts></AddProducts>
+      },{
+        path:'/dashboard/manage-orders',
+        element:<ManageOrders></ManageOrders>
       }
     ]
   }

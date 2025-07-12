@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+
 import { useState, useEffect } from "react";
 import useAuth from "../../../Hooks/useAuth";
 import { toast } from "react-toastify";
@@ -11,29 +11,31 @@ import {
     FaPlus,
     FaMinus,
     FaMobileAlt,
-    FaCreditCard,
     FaExchangeAlt,
     FaMapMarkerAlt,
     FaRegCopy,
+    FaMoneyCheckAlt,
+    FaUser,
+    FaEnvelope,
 } from "react-icons/fa";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import axios from "axios";
 
-const districts = [ /* জেলা লিস্ট এখানে আগের মতোই থাকবে */
-    "Bagerhat", "Bandarban", "Barguna", "Barisal", "Bhola", "Bogra", "Brahmanbaria",
-    "Chandpur", "Chattogram", "Chuadanga", "Comilla", "Cox’s Bazar", "Dhaka",
-    "Dinajpur", "Faridpur", "Feni", "Gaibandha", "Gazipur", "Gopalganj", "Habiganj",
-    "Jamalpur", "Jashore", "Jhalokati", "Jhenaidah", "Joypurhat", "Khagrachari", "Khulna",
-    "Kishoreganj", "Kurigram", "Kushtia", "Lakshmipur", "Lalmonirhat", "Madaripur",
-    "Magura", "Manikganj", "Meherpur", "Moulvibazar", "Munshiganj", "Mymensingh",
-    "Naogaon", "Narail", "Narayanganj", "Narsingdi", "Natore", "Netrokona",
-    "Nilphamari", "Noakhali", "Pabna", "Panchagarh", "Patuakhali", "Pirojpur", "Rajbari",
-    "Rajshahi", "Rangamati", "Rangpur", "Satkhira", "Shariatpur", "Sherpur", "Sirajganj",
-    "Sunamganj", "Sylhet", "Tangail", "Thakurgaon"
+const districts = [ /* জেলা লিস্ট */ "Bagerhat", "Bandarban", "Barguna", "Barisal", "Bhola", "Bogra", "Brahmanbaria",
+    "Chandpur", "Chattogram", "Chuadanga", "Comilla", "Cox’s Bazar", "Dhaka", "Dinajpur", "Faridpur", "Feni",
+    "Gaibandha", "Gazipur", "Gopalganj", "Habiganj", "Jamalpur", "Jashore", "Jhalokati", "Jhenaidah", "Joypurhat",
+    "Khagrachari", "Khulna", "Kishoreganj", "Kurigram", "Kushtia", "Lakshmipur", "Lalmonirhat", "Madaripur",
+    "Magura", "Manikganj", "Meherpur", "Moulvibazar", "Munshiganj", "Mymensingh", "Naogaon", "Narail", "Narayanganj",
+    "Narsingdi", "Natore", "Netrokona", "Nilphamari", "Noakhali", "Pabna", "Panchagarh", "Patuakhali", "Pirojpur",
+    "Rajbari", "Rajshahi", "Rangamati", "Rangpur", "Satkhira", "Shariatpur", "Sherpur", "Sirajganj", "Sunamganj",
+    "Sylhet", "Tangail", "Thakurgaon"
 ];
 
 const ConfirmOrder = () => {
     const { id } = useParams();
     const navigate = useNavigate();
     const { user } = useAuth();
+    const axiosSecure = useAxiosSecure();
 
     const [isProcessing, setIsProcessing] = useState(false);
     const [formData, setFormData] = useState({
@@ -95,14 +97,57 @@ const ConfirmOrder = () => {
     const handleConfirmPurchase = async (e) => {
         e.preventDefault();
         setIsProcessing(true);
+
         try {
-            await axios.post("http://localhost:5000/orders", {
-                productId: id,
-                ...formData,
-                orderDate: new Date(),
+            const now = new Date();
+            const date = now.toLocaleDateString('en-GB');
+            const time = now.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true,
             });
-            toast.success("✅ আপনার অর্ডার সফলভাবে নিশ্চিত হয়েছে!");
-            navigate("/");
+            const formattedDateTime = `${date} ${time}`;
+
+            const selectedQuantity = formData.quantity;
+
+            const orderData = {
+                productId: product._id,
+                productName: product.productName,
+                productImage: product.images?.[0],
+                unitPrice: product.totalPrice,
+                quantity: selectedQuantity,
+                totalPrice: product.totalPrice * selectedQuantity,
+                paymentMethod: formData.paymentMethod,
+                transactionId: formData.transactionId,
+                senderNumber: formData.senderNumber,
+                customer: {
+                    name: formData.name,
+                    email: formData.email,
+                    phone: formData.contactNumber,
+                    district: formData.district,
+                    thana: formData.thana,
+                    fullAddress: formData.fullAddress,
+                },
+                orderDate: formattedDateTime,
+                status: "pending",
+            };
+
+            // ✅ Step 1: Order Save
+            const res = await axiosSecure.post("/orders", orderData);
+
+            if (res.data.insertedId || res.data.acknowledged) {
+                // ✅ Step 2: Reduce Product Quantity (stock)
+                await axiosSecure.patch(`/products/quantity/${product._id}`, {
+                    quantityToUpdate: selectedQuantity, // Must be number
+                    status: "decrease"
+                });
+
+
+                toast.success("✅ আপনার অর্ডার সফলভাবে নিশ্চিত হয়েছে!");
+                navigate("/");
+            } else {
+                toast.error("❌ অর্ডার জমা দিতে সমস্যা হয়েছে।");
+            }
         } catch (err) {
             console.error(err);
             toast.error("❌ কিছু ভুল হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
@@ -111,15 +156,15 @@ const ConfirmOrder = () => {
         }
     };
 
+
     return (
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 py-6 bg-white rounded-lg shadow-md text-black">
+        <div className="max-w-6xl mx-auto px-4 mt-12 py-6 bg-white rounded-lg shadow-md text-black">
             <h1 className="text-3xl font-bold mb-8 text-center text-[#629D23]">আপনার অর্ডার নিশ্চিত করুন</h1>
 
             <div className="flex flex-col lg:flex-row gap-8">
                 {/* Product Info */}
                 <div className="w-full lg:w-1/3 p-4 bg-gray-100 rounded shadow">
                     <h2 className="text-xl font-semibold mb-4">{product.productName}</h2>
-
                     <div className="flex justify-between mb-2"><span className="font-semibold">মূল্য:</span><span>৳{product.totalPrice?.toLocaleString()}</span></div>
                     <div className="flex justify-between mb-2"><span className="font-semibold">স্টকে আছে:</span><span>{product.quantity}</span></div>
 
@@ -149,21 +194,15 @@ const ConfirmOrder = () => {
                         </div>
                     )}
 
-                    {/* Delivery Info */}
                     <div className="my-4 p-4 bg-yellow-50 border-l-4 border-yellow-400 text-yellow-800 text-sm rounded leading-relaxed">
-                        ⚠️ <strong>অর্ডার নিশ্চিত করার আগে দয়া করে নিচের নির্দেশনাগুলো ভালোভাবে পড়ুন:</strong>
-                        <br /><br />
+                        ⚠️ <strong>অর্ডার নিশ্চিত করার আগে দয়া করে নিচের নির্দেশনাগুলো ভালোভাবে পড়ুন:</strong><br /><br />
                         🚚 <strong>চট্টগ্রাম জেলার ভিতরে:</strong> ডেলিভারি চার্জ <strong>৮০ টাকা</strong><br />
-                        🚛 <strong>চট্টগ্রাম জেলার বাইরে:</strong> ডেলিভারি চার্জ <strong>১৫০ টাকা</strong>
-                        <br /><br />
-                        ✅ অনুগ্রহ করে অর্ডার কনফার্ম করার আগে উপরে দেওয়া বিকাশ/নগদ নাম্বারে ডেলিভারি চার্জ <strong>Send Money</strong> করুন।
-                        <br /><br />
-                        💳 <strong>Send Money</strong> করা নাম্বারটি “<strong>পেমেন্ট পাঠানো নাম্বার</strong>” ঘরে লিখুন।<br />
-                        🧾 <strong>লেনদেন নম্বর (Transaction ID)</strong> “<strong>লেনদেন নম্বর</strong>” ঘরে লিখুন।
-                        <br /><br />
-                        ❗ <strong>ভুল তথ্য প্রদান করলে আপনার অর্ডার কনফার্ম করা হবে না।</strong>
+                        🚛 <strong>চট্টগ্রাম জেলার বাইরে:</strong> ডেলিভারি চার্জ <strong>১৫০ টাকা</strong><br /><br />
+                        ✅ ডেলিভারি চার্জ <strong>Send Money</strong> করুন।<br />
+                        💳 <strong>Send Money</strong> নাম্বার লিখুন।<br />
+                        🧾 <strong>লেনদেন নম্বর</strong> লিখুন।<br /><br />
+                        ❗ <strong>ভুল তথ্য দিলে অর্ডার কনফার্ম হবে না।</strong>
                     </div>
-
 
                     {/* Quantity */}
                     <div className="mt-4">
@@ -183,24 +222,24 @@ const ConfirmOrder = () => {
 
                 {/* Form */}
                 <form onSubmit={handleConfirmPurchase} className="w-full lg:w-2/3 space-y-5">
-                    {/* Fields */}
+                    {/* Input fields with icons */}
                     {[
-                        { label: "আপনার নাম", name: "name", type: "text", value: formData.name, readOnly: true },
-                        { label: "ইমেইল", name: "email", type: "email", value: formData.email, readOnly: true },
-                        { label: "মোবাইল নাম্বার", name: "contactNumber", type: "tel", placeholder: "আপনার মোবাইল নাম্বার", required: true },
-                        { label: "লেনদেন নম্বর", name: "transactionId", type: "text", placeholder: "Bkash/Nagad ট্রানজ্যাকশন ID", required: true },
-                        { label: "পেমেন্ট পাঠানো নাম্বার", name: "senderNumber", type: "text", placeholder: "যে নাম্বার থেকে টাকা পাঠানো হয়েছে", required: true },
-                        { label: "থানা / উপজেলা", name: "thana", type: "text", placeholder: "আপনার থানা বা উপজেলা", required: true },
+                        { label: "আপনার নাম", name: "name", icon: <FaUser />, type: "text", readOnly: true },
+                        { label: "ইমেইল", name: "email", icon: <FaEnvelope />, type: "email", readOnly: true },
+                        { label: "মোবাইল নাম্বার", name: "contactNumber", icon: <FaMobileAlt />, type: "tel", placeholder: "আপনার মোবাইল নাম্বার" },
+                        { label: "লেনদেন নম্বর", name: "transactionId", icon: <FaExchangeAlt />, type: "text", placeholder: "Bkash/Nagad ট্রানজ্যাকশন ID" },
+                        { label: "পেমেন্ট পাঠানো নাম্বার", name: "senderNumber", icon: <FaMoneyCheckAlt />, type: "text", placeholder: "যে নাম্বার থেকে টাকা পাঠানো হয়েছে" },
+                        { label: "থানা / উপজেলা", name: "thana", icon: <FaMapMarkerAlt />, type: "text", placeholder: "আপনার থানা বা উপজেলা" },
                     ].map((field) => (
                         <div key={field.name}>
-                            <label className="block font-semibold mb-1">{field.label}</label>
+                            <label className="block font-semibold mb-1 flex items-center gap-2">{field.icon} {field.label}</label>
                             <input
                                 name={field.name}
                                 type={field.type}
                                 value={formData[field.name]}
                                 onChange={handleChange}
                                 placeholder={field.placeholder}
-                                required={field.required}
+                                required={!field.readOnly}
                                 readOnly={field.readOnly}
                                 className="w-full border border-gray-300 rounded px-3 py-2 bg-white"
                             />

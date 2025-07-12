@@ -34,7 +34,7 @@ const Dashboard = () => {
     { name: 'Admin Panel', path: '/dashboard/admin-dashboard', icon: <FaUserShield /> },
     { name: 'Inventory Overview', path: '/dashboard/my-inventory', icon: <FaBoxes /> },
     { name: 'Add New Product', path: '/dashboard/add-product', icon: <FaPlusCircle /> },
-    { name: 'Manage Products', path: '/dashboard/manage-product', icon: <FaTasks /> },
+    { name: 'Manage Orders', path: '/dashboard/manage-orders', icon: <FaTasks /> },
   ];
 
   const userMenu = [
@@ -139,7 +139,7 @@ const Dashboard = () => {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 ml-0 md:ml-64 p-6">
+      <main className="flex-1 ml-0 md:ml-64 p-6 bg-white">
         <Outlet />
       </main>
     </div>
