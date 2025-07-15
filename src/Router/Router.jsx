@@ -15,6 +15,9 @@ import Wishlist from "../pages/Wishlist/Wishlist";
 import ProductDetails from "../pages/HomePage/AllProduct/ProductDetails";
 import ConfirmOrder from "../pages/HomePage/AllProduct/ConfirmOrder";
 import ManageOrders from "../pages/Admin/Manage Orders/ManageOrders";
+import OrderDetails from "../pages/Admin/Manage Orders/OrderDetails";
+import MyInventory from "../pages/Admin/MyInventory/MyInventory";
+import EditInventory from "../pages/Admin/MyInventory/EditInventory";
 
 
 export const router = createBrowserRouter([
@@ -68,9 +71,20 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/add-product',
         element: <AddProducts></AddProducts>
-      },{
-        path:'/dashboard/manage-orders',
-        element:<ManageOrders></ManageOrders>
+      }, {
+        path: '/dashboard/manage-orders',
+        element: <ManageOrders></ManageOrders>
+      }, {
+        path: '/dashboard/order-details/:id',
+        element: <OrderDetails></OrderDetails>
+      },
+      {
+        path:'/dashboard/my-inventory',
+        element:<MyInventory></MyInventory>
+      },
+      {
+        path:'edit-products/:id',
+        element:<EditInventory></EditInventory>
       }
     ]
   }
