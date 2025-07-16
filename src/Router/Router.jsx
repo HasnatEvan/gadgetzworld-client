@@ -20,6 +20,7 @@ import MyInventory from "../pages/Admin/MyInventory/MyInventory";
 import EditInventory from "../pages/Admin/MyInventory/EditInventory";
 
 
+
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -85,7 +86,8 @@ export const router = createBrowserRouter([
       {
         path:'edit-products/:id',
         element:<EditInventory></EditInventory>
-      }
+      },
+     
     ]
   }
 ]);

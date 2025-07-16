@@ -89,7 +89,7 @@ const AddProducts = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 text-gray-600 flex items-center justify-center px-2 sm:px-4">
+    <div className="min-h-screen  text-gray-600 flex items-center justify-center px-2 sm:px-4">
       <div className="w-full max-w-3xl p-4 sm:p-6 md:p-8">
         <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#629D23] mb-6">
           Add New Product

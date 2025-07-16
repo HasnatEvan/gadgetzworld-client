@@ -11,6 +11,8 @@ import {
   FaMapMarkerAlt,
 } from "react-icons/fa";
 
+import logo from '../../src/assets/Logo/logo.jpg'  // লোকাল লোগো
+
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
@@ -23,9 +25,7 @@ const Navbar = () => {
   const axiosSecure = useAxiosSecure();
   const navigate = useNavigate();
 
-  const {
-    data: wishlist = [],
-  } = useQuery({
+  const { data: wishlist = [] } = useQuery({
     queryKey: ["wishlist", user?.email],
     enabled: !!user?.email,
     queryFn: async () => {
@@ -46,7 +46,12 @@ const Navbar = () => {
 
   return (
     <div className="font-sans relative">
-      {/* Topbar for desktop */}
+      {/* Mobile Topbar */}
+      <div className="block md:hidden bg-white text-gray-800 text-sm px-4 py-2 text-center border-b border-gray-200">
+        Welcome to our GadgetzWorld!
+      </div>
+
+      {/* Desktop Topbar */}
       <div className="hidden md:flex bg-white text-gray-800 text-sm px-4 py-2 justify-between items-center">
         <span>Welcome to our GadgetzWorld!</span>
         <div className="space-x-4">
@@ -70,26 +75,16 @@ const Navbar = () => {
         {/* Logo (Desktop Only) */}
         <div className="hidden md:flex items-center space-x-2">
           <img
-            src="https://i.ibb.co/4grztcp/logo-icon.png"
+            src={logo}   
             alt="logo"
             className="w-10 h-10"
           />
           <h1 className="text-2xl font-bold whitespace-nowrap">
-            <span className="text-[#629D23]">Gadgetz</span>World
+            <span className="text-[#629D23]">𝑮𝒂𝒅𝒈𝒆𝒕𝒛</span>𝑾𝒐𝒓𝒍𝒅
           </h1>
         </div>
 
-        {/* Search Bar */}
-        <div className="flex w-full md:w-1/2 items-center">
-          <input
-            type="text"
-            placeholder="Search for products"
-            className="w-full py-2 px-4 text-gray-800 outline-none border border-gray-200 rounded-l"
-          />
-          <button className="bg-[#629D23] text-white px-5 py-2 flex items-center rounded-r whitespace-nowrap hover:bg-[#51711A] transition">
-            Search <FaSearch className="ml-2" />
-          </button>
-        </div>
+        {/* Search Bar অংশ সরানো হয়েছে */}
 
         {/* Right Buttons (Desktop Only) */}
         <div className="hidden md:flex flex-wrap justify-end space-x-2">
@@ -127,7 +122,7 @@ const Navbar = () => {
       {/* Bottom Navigation */}
       <div className="bg-[#629D23] text-white px-4 py-3 flex justify-between items-center">
         <h2 className="text-lg font-semibold text-white whitespace-nowrap md:hidden">
-          GadgetzWorld
+          𝑮𝒂𝒅𝒈𝒆𝒕𝒛𝑾𝒐𝒓𝒍𝒅
         </h2>
 
         <button
@@ -139,19 +134,31 @@ const Navbar = () => {
         </button>
 
         <nav className="hidden md:flex space-x-6 font-semibold text-lg">
-          <NavLink to="/" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink
+            to="/"
+            className="flex items-center space-x-1 hover:text-white/80"
+          >
             <FaHome />
             <span>Home</span>
           </NavLink>
-          <NavLink to="/about" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink
+            to="/about"
+            className="flex items-center space-x-1 hover:text-white/80"
+          >
             <FaInfoCircle />
             <span>About</span>
           </NavLink>
-          <NavLink to="/dashboard" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink
+            to="/dashboard"
+            className="flex items-center space-x-1 hover:text-white/80"
+          >
             <FaTachometerAlt />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink to="/contact" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink
+            to="/contact"
+            className="flex items-center space-x-1 hover:text-white/80"
+          >
             <FaEnvelope />
             <span>Contact</span>
           </NavLink>
@@ -160,7 +167,8 @@ const Navbar = () => {
         <div className="hidden md:flex items-center text-sm text-right text-white/90">
           <FaMapMarkerAlt className="mr-2" />
           <span>
-            Delivery: <span className="font-bold">258 FKD Street, Berlin</span>
+            Delivery:{" "}
+            <span className="font-bold">258 FKD Street, Berlin</span>
           </span>
         </div>
       </div>
@@ -175,9 +183,9 @@ const Navbar = () => {
       )}
 
       <aside
-        className={`fixed top-0 right-0 h-full w-64 bg-white text-gray-800 shadow-lg transform transition-transform duration-300 z-50 md:hidden
-          ${menuOpen ? "translate-x-0" : "translate-x-full"}
-        `}
+        className={`fixed top-0 right-0 h-full w-64 bg-white text-gray-800 shadow-lg transform transition-transform duration-300 z-50 md:hidden ${
+          menuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
         aria-label="Mobile menu"
       >
         <div className="flex justify-end items-center p-4 border-b border-gray-200">
@@ -191,19 +199,31 @@ const Navbar = () => {
         </div>
 
         <nav className="flex flex-col p-4 space-y-4 font-semibold text-lg">
-          <NavLink to="/" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink
+            to="/"
+            className="flex items-center space-x-2 hover:text-[#629D23]"
+          >
             <FaHome />
             <span>Home</span>
           </NavLink>
-          <NavLink to="/about" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink
+            to="/about"
+            className="flex items-center space-x-2 hover:text-[#629D23]"
+          >
             <FaInfoCircle />
             <span>About</span>
           </NavLink>
-          <NavLink to="/dashboard" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink
+            to="/dashboard"
+            className="flex items-center space-x-2 hover:text-[#629D23]"
+          >
             <FaTachometerAlt />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink to="/contact" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink
+            to="/contact"
+            className="flex items-center space-x-2 hover:text-[#629D23]"
+          >
             <FaEnvelope />
             <span>Contact</span>
           </NavLink>
@@ -219,13 +239,19 @@ const Navbar = () => {
               <span>Logout</span>
             </button>
           ) : (
-            <NavLink to="/login" className="flex items-center space-x-2 hover:text-[#629D23]">
+            <NavLink
+              to="/login"
+              className="flex items-center space-x-2 hover:text-[#629D23]"
+            >
               <FaUser />
               <span>Account</span>
             </NavLink>
           )}
 
-          <NavLink to="/wishlist" className="flex items-center space-x-2 relative hover:text-[#629D23]">
+          <NavLink
+            to="/wishlist"
+            className="flex items-center space-x-2 relative hover:text-[#629D23]"
+          >
             <FaHeart />
             <span>Wishlist</span>
             <span className="absolute -top-1 -right-2 bg-[#629D23] text-white text-xs px-1 rounded-full">

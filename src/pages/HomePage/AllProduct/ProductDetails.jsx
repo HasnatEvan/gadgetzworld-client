@@ -3,7 +3,7 @@ import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
 import { FaBoxes, FaArrowLeft } from "react-icons/fa";
 import { useState } from "react";
-import { toast } from "react-toastify"; // ✅ Toast import
+import { toast } from "react-toastify";
 
 const ProductDetails = () => {
     const { id } = useParams();
@@ -52,8 +52,6 @@ const ProductDetails = () => {
                 <button
                     onClick={() => navigate(-1)}
                     className="flex items-center gap-2 text-[#629D23] hover:text-[#527619] transition-colors duration-300 font-semibold text-sm sm:text-base"
-                    aria-label="Go back"
-                    title="Back"
                 >
                     <FaArrowLeft size={18} />
                     Back
@@ -68,21 +66,24 @@ const ProductDetails = () => {
                         ৳{product.totalPrice.toLocaleString()}
                     </div>
 
+                    {/* Main Product Image */}
                     <img
                         src={mainImage}
                         alt={product.productName}
-                        className="w-full h-60 sm:h-72 md:h-[450px] object-cover rounded-xl cursor-pointer transition-transform duration-300 hover:scale-105"
+                        className="w-full h-[400px] object-contain rounded-xl bg-white p-2 cursor-pointer transition-transform duration-300 hover:scale-105"
                         onClick={() => setIsFullScreen(true)}
                         loading="lazy"
                     />
 
+                    {/* Thumbnail Images */}
                     <div className="flex gap-3 mt-4 sm:mt-6 overflow-x-auto scrollbar-thin scrollbar-thumb-[#629D23] scrollbar-track-gray-200">
                         {product.images?.map((img, idx) => (
                             <img
                                 key={idx}
                                 src={img}
-                                alt={`${product.productName} thumbnail ${idx + 1}`}
-                                className={`w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border-2 cursor-pointer transition-transform duration-300 hover:scale-110 flex-shrink-0 ${img === mainImage ? "border-[#629D23]" : "border-gray-300"}`}
+                                alt={`Thumbnail ${idx + 1}`}
+                                className={`w-16 h-16 sm:w-20 sm:h-20 object-cover rounded-lg border-2 cursor-pointer transition-transform duration-300 hover:scale-110 flex-shrink-0 ${img === mainImage ? "border-[#629D23]" : "border-gray-300"
+                                    }`}
                                 onClick={() => setSelectedImage(img)}
                                 loading="lazy"
                             />
@@ -97,9 +98,11 @@ const ProductDetails = () => {
                             {product.productName}
                         </h1>
 
+                        {/* Stock Message */}
                         {product.quantity === 0 && (
                             <p className="text-red-600 text-sm sm:text-base font-semibold mb-4">
-                                ⚠️ This product is currently <span className="underline">Out of Stock</span>.
+                                ⚠️ This product is currently{" "}
+                                <span className="underline">Out of Stock</span>.
                             </p>
                         )}
 
@@ -116,6 +119,7 @@ const ProductDetails = () => {
                             )}
                         </div>
 
+                        {/* Description */}
                         <section>
                             <h2 className="text-lg sm:text-xl font-semibold text-gray-600 mb-2">
                                 Description
@@ -125,6 +129,7 @@ const ProductDetails = () => {
                             </p>
                         </section>
 
+                        {/* Quantity Info */}
                         <section className="mt-8 sm:mt-10 text-gray-700 text-base space-y-4">
                             <p className="flex items-center gap-2 sm:gap-3 font-medium text-sm sm:text-base">
                                 <FaBoxes className="text-blue-600" size={20} />
@@ -133,7 +138,7 @@ const ProductDetails = () => {
                             </p>
                         </section>
 
-                        {/* ✅ Updated Purchase Button */}
+                        {/* Purchase Button */}
                         <div className="mt-8">
                             <button
                                 onClick={() => {

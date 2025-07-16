@@ -298,10 +298,18 @@ const ConfirmOrder = () => {
                     <button
                         type="submit"
                         disabled={isProcessing}
-                        className="w-full bg-[#629D23] text-white py-3 rounded-lg font-semibold hover:bg-[#51711A] transition"
+                        className="w-full bg-[#629D23] text-white py-3 rounded-lg font-semibold hover:bg-[#51711A] transition flex items-center justify-center gap-2"
                     >
-                        {isProcessing ? "প্রসেসিং হচ্ছে..." : "অর্ডার নিশ্চিত করুন"}
+                        {isProcessing ? (
+                            <>
+                                <span className="loading loading-infinity loading-sm text-white"></span>
+                                প্রসেসিং হচ্ছে...
+                            </>
+                        ) : (
+                            "অর্ডার নিশ্চিত করুন"
+                        )}
                     </button>
+
                 </form>
             </div>
         </div>

@@ -2,7 +2,7 @@ import AllProduct from "./AllProduct/AllProduct";
 
 const Home = () => {
     return (
-        <div>
+        <div className="max-w-screen-xl mx-auto">
             <AllProduct></AllProduct>
         </div>
     );

@@ -34,8 +34,8 @@ const ProductCard = ({ product }) => {
   }, [user?.email, product._id]);
 
   const handleLoveClick = async (e) => {
-    e.stopPropagation(); // ⛔ prevent Link from triggering
-    e.preventDefault();  // ⛔ prevent redirect
+    e.stopPropagation(); // prevent Link from triggering
+    e.preventDefault();  // prevent redirect
 
     if (!user?.email) {
       toast.warning("Please login first");
@@ -82,22 +82,21 @@ const ProductCard = ({ product }) => {
 
   return (
     <div className="relative">
-      {/* ❤️ Heart Button */}
+      {/* Heart Button */}
       <button
         onClick={handleLoveClick}
         disabled={loading}
-        className={`absolute top-3 right-3 z-20 text-xl transition-colors duration-200 ${
-          isLoved ? "text-red-500" : "text-gray-300 hover:text-red-500"
-        }`}
+        className={`absolute top-3 right-3 z-20 text-xl transition-colors duration-200 ${isLoved ? "text-red-500" : "text-gray-300 hover:text-red-500"
+          }`}
         aria-label={isLoved ? "Remove from wishlist" : "Add to wishlist"}
       >
         <FaHeart />
       </button>
 
-      {/* 🛍️ Product Card Link */}
+      {/* Product Card Link */}
       <Link to={`/product/${product._id}`}>
-        <div className="bg-white shadow-md rounded-xl overflow-hidden hover:shadow-lg transition duration-300 flex flex-col group">
-          {/* 🔖 Discount Badge */}
+        <div className="overflow-hidden hover:shadow-lg transition duration-300 flex flex-col group">
+          {/* Discount Badge */}
           {isDiscounted && (
             <span className="absolute top-3 left-3 z-10 bg-red-600 text-white text-xs font-bold px-3 py-1 rounded-full shadow">
               Discount
@@ -105,11 +104,11 @@ const ProductCard = ({ product }) => {
           )}
 
           {/* Image */}
-          <div className="relative">
+          <div className="relative w-full overflow-hidden h-48 bg-white flex items-center justify-center">
             <img
               src={product.images[1]}
               alt={product.productName}
-              className="w-full h-52 object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+              className="w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
             />
           </div>
 
@@ -119,8 +118,24 @@ const ProductCard = ({ product }) => {
               {product.productName}
             </h2>
 
+            {/* Quantity / Stock Status */}
+            {product.quantity === 0 ? (
+              <p className="text-sm text-red-600 font-semibold">
+              Out of Stock
+              </p>
+            ) : product.quantity <= 5 ? (
+              <p className="text-sm text-orange-600 font-semibold">
+                Low stock! Hurry up.
+              </p>
+            ) : (
+              <p className="text-sm text-gray-600">
+                Available Quantity: <span className="font-semibold">{product.quantity}</span>
+              </p>
+            )}
+
+
             <div className="flex items-center justify-between mt-auto">
-              <p className="bg-green-600 text-white text-sm font-semibold px-3 py-1 rounded-full">
+              <p className=" text-gray-600 text-sm font-semiboldpy-1 rounded-full">
                 ৳{product.totalPrice}
               </p>
               {product.price && isDiscounted && (
