@@ -5,7 +5,7 @@ import {
   FaBoxes,
   FaPlusCircle,
   FaTasks,
-  FaTachometerAlt,
+
   FaShoppingCart,
   FaBars,
   FaTimes,
@@ -25,7 +25,7 @@ const Dashboard = () => {
       if (role === 'admin') {
         navigate('/dashboard/admin-dashboard');
       } else {
-        navigate('/dashboard/user-dashboard');
+        navigate('/dashboard/my-order');
       }
     }
   }, [role, isLoading, location.pathname, navigate]);
@@ -38,7 +38,6 @@ const Dashboard = () => {
   ];
 
   const userMenu = [
-    { name: 'User Dashboard', path: '/dashboard/user-dashboard', icon: <FaTachometerAlt /> },
     { name: 'My Orders', path: '/dashboard/my-order', icon: <FaShoppingCart /> },
   ];
 

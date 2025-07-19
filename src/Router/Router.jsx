@@ -7,7 +7,6 @@ import Error from "../Error/Error";
 import Login from "../Authentication/Login";
 import Signup from "../Authentication/Signup";
 import Dashboard from "../Layout/Dashboard";
-import UserDashboard from "../pages/Customer/UserDashboard/UserDashboard";
 import MyOrder from "../pages/Customer/MyOrder/MyOrder";
 import AdminDashboard from "../pages/Admin/AdminDashboard/AdminDashboard";
 import AddProducts from "../pages/Admin/AddProducts/AddProducts";
@@ -18,6 +17,9 @@ import ManageOrders from "../pages/Admin/Manage Orders/ManageOrders";
 import OrderDetails from "../pages/Admin/Manage Orders/OrderDetails";
 import MyInventory from "../pages/Admin/MyInventory/MyInventory";
 import EditInventory from "../pages/Admin/MyInventory/EditInventory";
+import PrivateRoute from "./PrivateRoute";
+import AdminRoute from "./AdminRoute";
+import TrackOrder from "../pages/HomePage/Track Order/TrackOrder";
 
 
 
@@ -28,14 +30,6 @@ export const router = createBrowserRouter([
     errorElement: <Error></Error>,
     children: [
       {
-        path: '/',
-        element: <Home></Home>
-      },
-      {
-        path: '/product/:id',
-        element: <ProductDetails></ProductDetails>
-      },
-      {
         path: '/login',
         element: <Login></Login>
       },
@@ -44,50 +38,59 @@ export const router = createBrowserRouter([
         element: <Signup></Signup>
       },
       {
+        path: '/',
+        element: <Home></Home>
+      },
+      {
+        path: '/product/:id',
+        element: <PrivateRoute><ProductDetails></ProductDetails></PrivateRoute>
+      },
+      {
         path: '/wishlist',
-        element: <Wishlist></Wishlist>
+        element: <PrivateRoute> <Wishlist></Wishlist></PrivateRoute>
       },
       {
         path: '/ConfirmOrder/:id',
-        element: <ConfirmOrder></ConfirmOrder>
+        element: <PrivateRoute><ConfirmOrder></ConfirmOrder></PrivateRoute>
+      },
+      {
+        path:'/track-order',
+        element:<TrackOrder></TrackOrder>
       }
     ],
   },
   {
     path: '/dashboard',
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard>,</PrivateRoute>,
     children: [
-      {
-        path: '/dashboard/user-dashboard',
-        element: <UserDashboard></UserDashboard>
-      },
+
       {
         path: '/dashboard/my-order',
-        element: <MyOrder></MyOrder>
+        element: <PrivateRoute><MyOrder></MyOrder></PrivateRoute>
       },
       {
         path: '/dashboard/admin-dashboard',
-        element: <AdminDashboard></AdminDashboard>
+        element: <AdminRoute> <PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute></AdminRoute>
       },
       {
         path: '/dashboard/add-product',
-        element: <AddProducts></AddProducts>
+        element: <AdminRoute> <PrivateRoute><AddProducts></AddProducts></PrivateRoute></AdminRoute>
       }, {
         path: '/dashboard/manage-orders',
-        element: <ManageOrders></ManageOrders>
+        element: <AdminRoute> <PrivateRoute><ManageOrders></ManageOrders></PrivateRoute></AdminRoute>
       }, {
         path: '/dashboard/order-details/:id',
-        element: <OrderDetails></OrderDetails>
+        element: <AdminRoute><PrivateRoute><OrderDetails></OrderDetails></PrivateRoute></AdminRoute>
       },
       {
-        path:'/dashboard/my-inventory',
-        element:<MyInventory></MyInventory>
+        path: '/dashboard/my-inventory',
+        element: <AdminRoute> <PrivateRoute><MyInventory></MyInventory></PrivateRoute></AdminRoute>
       },
       {
-        path:'edit-products/:id',
-        element:<EditInventory></EditInventory>
+        path: 'edit-products/:id',
+        element: <AdminRoute><PrivateRoute><EditInventory></EditInventory></PrivateRoute></AdminRoute>
       },
-     
+
     ]
   }
 ]);

@@ -9,9 +9,11 @@ import {
   FaBars,
   FaTimes,
   FaMapMarkerAlt,
+  FaFacebookF,
+  FaWhatsapp,
 } from "react-icons/fa";
 
-import logo from '../../src/assets/Logo/logo.jpg'  // লোকাল লোগো
+import logo from '../../src/assets/Logo/logo.jpg';
 
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -48,7 +50,35 @@ const Navbar = () => {
     <div className="font-sans relative">
       {/* Mobile Topbar */}
       <div className="block md:hidden bg-white text-gray-800 text-sm px-4 py-2 text-center border-b border-gray-200">
-        Welcome to our GadgetzWorld!
+        <p>Welcome to our GadgetzWorld!</p>
+        {/* Social Icons */}
+        <div className="flex justify-center mt-2 space-x-4 text-xl">
+          <a
+            href="https://facebook.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800"
+            aria-label="Facebook"
+          >
+            <FaFacebookF />
+          </a>
+          <a
+            href="mailto:support@gadgetzworld.com"
+            className="text-red-600 hover:text-red-800"
+            aria-label="Email"
+          >
+            <FaEnvelope />
+          </a>
+          <a
+            href="https://wa.me/8801234567890"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-green-500 hover:text-green-700"
+            aria-label="WhatsApp"
+          >
+            <FaWhatsapp />
+          </a>
+        </div>
       </div>
 
       {/* Desktop Topbar */}
@@ -74,17 +104,11 @@ const Navbar = () => {
       <div className="bg-white text-gray-800 px-4 py-4 flex flex-col md:flex-row items-center justify-between border-b border-gray-100 gap-4">
         {/* Logo (Desktop Only) */}
         <div className="hidden md:flex items-center space-x-2">
-          <img
-            src={logo}   
-            alt="logo"
-            className="w-10 h-10"
-          />
+          <img src={logo} alt="logo" className="w-10 h-10" />
           <h1 className="text-2xl font-bold whitespace-nowrap">
             <span className="text-[#629D23]">𝑮𝒂𝒅𝒈𝒆𝒕𝒛</span>𝑾𝒐𝒓𝒍𝒅
           </h1>
         </div>
-
-        {/* Search Bar অংশ সরানো হয়েছে */}
 
         {/* Right Buttons (Desktop Only) */}
         <div className="hidden md:flex flex-wrap justify-end space-x-2">
@@ -120,7 +144,7 @@ const Navbar = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="bg-[#629D23] text-white px-4 py-3 flex justify-between items-center">
+      <div className="bg-[#629D23] text-white px-4 py-3 -mt-6 lg:mt-2 flex justify-between items-center">
         <h2 className="text-lg font-semibold text-white whitespace-nowrap md:hidden">
           𝑮𝒂𝒅𝒈𝒆𝒕𝒛𝑾𝒐𝒓𝒍𝒅
         </h2>
@@ -134,31 +158,19 @@ const Navbar = () => {
         </button>
 
         <nav className="hidden md:flex space-x-6 font-semibold text-lg">
-          <NavLink
-            to="/"
-            className="flex items-center space-x-1 hover:text-white/80"
-          >
+          <NavLink to="/" className="flex items-center space-x-1 hover:text-white/80">
             <FaHome />
             <span>Home</span>
           </NavLink>
-          <NavLink
-            to="/about"
-            className="flex items-center space-x-1 hover:text-white/80"
-          >
+          <NavLink to="/about" className="flex items-center space-x-1 hover:text-white/80">
             <FaInfoCircle />
             <span>About</span>
           </NavLink>
-          <NavLink
-            to="/dashboard"
-            className="flex items-center space-x-1 hover:text-white/80"
-          >
+          <NavLink to="/dashboard" className="flex items-center space-x-1 hover:text-white/80">
             <FaTachometerAlt />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink
-            to="/contact"
-            className="flex items-center space-x-1 hover:text-white/80"
-          >
+          <NavLink to="/contact" className="flex items-center space-x-1 hover:text-white/80">
             <FaEnvelope />
             <span>Contact</span>
           </NavLink>
@@ -167,8 +179,7 @@ const Navbar = () => {
         <div className="hidden md:flex items-center text-sm text-right text-white/90">
           <FaMapMarkerAlt className="mr-2" />
           <span>
-            Delivery:{" "}
-            <span className="font-bold">258 FKD Street, Berlin</span>
+            Delivery: <span className="font-bold">258 FKD Street, Berlin</span>
           </span>
         </div>
       </div>
@@ -199,31 +210,19 @@ const Navbar = () => {
         </div>
 
         <nav className="flex flex-col p-4 space-y-4 font-semibold text-lg">
-          <NavLink
-            to="/"
-            className="flex items-center space-x-2 hover:text-[#629D23]"
-          >
+          <NavLink to="/" className="flex items-center space-x-2 hover:text-[#629D23]">
             <FaHome />
             <span>Home</span>
           </NavLink>
-          <NavLink
-            to="/about"
-            className="flex items-center space-x-2 hover:text-[#629D23]"
-          >
+          <NavLink to="/about" className="flex items-center space-x-2 hover:text-[#629D23]">
             <FaInfoCircle />
             <span>About</span>
           </NavLink>
-          <NavLink
-            to="/dashboard"
-            className="flex items-center space-x-2 hover:text-[#629D23]"
-          >
+          <NavLink to="/dashboard" className="flex items-center space-x-2 hover:text-[#629D23]">
             <FaTachometerAlt />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink
-            to="/contact"
-            className="flex items-center space-x-2 hover:text-[#629D23]"
-          >
+          <NavLink to="/contact" className="flex items-center space-x-2 hover:text-[#629D23]">
             <FaEnvelope />
             <span>Contact</span>
           </NavLink>
@@ -239,10 +238,7 @@ const Navbar = () => {
               <span>Logout</span>
             </button>
           ) : (
-            <NavLink
-              to="/login"
-              className="flex items-center space-x-2 hover:text-[#629D23]"
-            >
+            <NavLink to="/login" className="flex items-center space-x-2 hover:text-[#629D23]">
               <FaUser />
               <span>Account</span>
             </NavLink>

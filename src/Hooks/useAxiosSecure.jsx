@@ -5,7 +5,7 @@ import useAuth from './useAuth'
 
 
 export const axiosSecure = axios.create({
-  baseURL: 'http://localhost:5000',  // Corrected URL format
+  baseURL: 'https://gadgetzworld-server.vercel.app',  // Corrected URL format
   withCredentials: true,
 })
 

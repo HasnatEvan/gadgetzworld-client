@@ -64,12 +64,18 @@ const ConfirmOrder = () => {
     const { data: product, isLoading, error } = useQuery({
         queryKey: ["product", id],
         queryFn: async () => {
-            const { data } = await axios.get(`http://localhost:5000/product/${id}`);
+            const { data } = await axios.get(`https://gadgetzworld-server.vercel.app/product/${id}`);
             return data;
         },
     });
 
-    if (isLoading) return <div className="text-center mt-10">পণ্য তথ্য লোড হচ্ছে...</div>;
+   if (isLoading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <span className="loading loading-bars loading-xl text-[#629D23]"></span>
+      </div>
+    );
+  }
     if (error) return <div className="text-center mt-10 text-red-600">পণ্য তথ্য লোড করতে সমস্যা হয়েছে।</div>;
 
     const handleChange = (e) => {

@@ -11,7 +11,7 @@ const AllProduct = () => {
   const { data: products = [], isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: async () => {
-      const { data } = await axios.get("http://localhost:5000/products");
+      const { data } = await axios.get("https://gadgetzworld-server.vercel.app/products");
       return data;
     },
   });

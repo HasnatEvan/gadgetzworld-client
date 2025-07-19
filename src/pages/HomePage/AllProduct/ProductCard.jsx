@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
 
       try {
         const res = await axios.get(
-          `http://localhost:5000/wishlist?email=${user.email}`
+          `https://gadgetzworld-server.vercel.app/wishlist?email=${user.email}`
         );
         const alreadyExists = res.data.some(
           (item) => item.product._id === product._id
@@ -47,7 +47,7 @@ const ProductCard = ({ product }) => {
 
     try {
       if (isLoved) {
-        const res = await axios.delete("http://localhost:5000/wishlist", {
+        const res = await axios.delete("https://gadgetzworld-server.vercel.app/wishlist", {
           data: {
             productId: product._id,
             email: user.email,
@@ -59,7 +59,7 @@ const ProductCard = ({ product }) => {
           toast.info("Removed from wishlist");
         }
       } else {
-        const res = await axios.post("http://localhost:5000/wishlist", {
+        const res = await axios.post("https://gadgetzworld-server.vercel.app/wishlist", {
           product,
           user: {
             name: user.displayName || "Unknown",
@@ -114,7 +114,7 @@ const ProductCard = ({ product }) => {
 
           {/* Info */}
           <div className="p-4 flex flex-col justify-between flex-grow space-y-2">
-            <h2 className="text-lg font-bold text-gray-800 truncate">
+            <h2 className="text-lg font-bold text-gray-600 truncate">
               {product.productName}
             </h2>
 

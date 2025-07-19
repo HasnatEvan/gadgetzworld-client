@@ -55,7 +55,7 @@ const AuthProviders = ({ children }) => {
         // ✅ Get JWT token from server
         try {
           await axios.post(
-            'http://localhost:5000/jwt',
+            'https://gadgetzworld-server.vercel.app/jwt',
             { email: currentUser.email },
             { withCredentials: true }
           );
@@ -67,7 +67,7 @@ const AuthProviders = ({ children }) => {
 
         // ✅ Remove token cookie
         try {
-          await axios.get('http://localhost:5000/logout', {
+          await axios.get('https://gadgetzworld-server.vercel.app/logout', {
             withCredentials: true,
           });
         } catch (error) {

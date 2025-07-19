@@ -33,7 +33,7 @@ const Signup = () => {
 
       // Save user to database
       const userData = { name, email };
-      await axios.post(`http://localhost:5000/users/${email}`, userData);
+      await axios.post(`https://gadgetzworld-server.vercel.app/users/${email}`, userData);
 
       toast.success('Account created successfully!');
       form.reset();
