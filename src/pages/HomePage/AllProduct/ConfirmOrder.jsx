@@ -69,13 +69,13 @@ const ConfirmOrder = () => {
         },
     });
 
-   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <span className="loading loading-bars loading-xl text-[#629D23]"></span>
-      </div>
-    );
-  }
+    if (isLoading) {
+        return (
+            <div className="flex justify-center items-center min-h-screen">
+                <span className="loading loading-bars loading-xl text-[#ef8220]"></span>
+            </div>
+        );
+    }
     if (error) return <div className="text-center mt-10 text-red-600">পণ্য তথ্য লোড করতে সমস্যা হয়েছে।</div>;
 
     const handleChange = (e) => {
@@ -164,8 +164,8 @@ const ConfirmOrder = () => {
 
 
     return (
-        <div className="max-w-6xl mx-auto px-4 mt-12 py-6 bg-white rounded-lg shadow-md text-black">
-            <h1 className="text-3xl font-bold mb-8 text-center text-[#629D23]">আপনার অর্ডার নিশ্চিত করুন</h1>
+        <div className="max-w-6xl mx-auto px-4 mt-4 py-6 bg-white  text-black">
+            <h1 className="text-3xl font-bold mb-8 text-center text-gray-500">আপনার অর্ডার নিশ্চিত করুন</h1>
 
             <div className="flex flex-col lg:flex-row gap-8">
                 {/* Product Info */}
@@ -304,7 +304,7 @@ const ConfirmOrder = () => {
                     <button
                         type="submit"
                         disabled={isProcessing}
-                        className="w-full bg-[#629D23] text-white py-3 rounded-lg font-semibold hover:bg-[#51711A] transition flex items-center justify-center gap-2"
+                        className="w-full bg-[#ef8220] text-white py-3 rounded-lg font-semibold hover:bg-[#ef8318d1] transition flex items-center justify-center gap-2"
                     >
                         {isProcessing ? (
                             <>

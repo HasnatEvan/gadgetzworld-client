@@ -34,6 +34,7 @@ const Dashboard = () => {
     { name: 'Admin Panel', path: '/dashboard/admin-dashboard', icon: <FaUserShield /> },
     { name: 'Inventory Overview', path: '/dashboard/my-inventory', icon: <FaBoxes /> },
     { name: 'Add New Product', path: '/dashboard/add-product', icon: <FaPlusCircle /> },
+    { name: 'Add Banner', path: '/dashboard/add-banner', icon: <FaPlusCircle /> }, // new
     { name: 'Manage Orders', path: '/dashboard/manage-orders', icon: <FaTasks /> },
   ];
 
@@ -46,7 +47,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <span className="loading loading-bars loading-xl text-[#629D23]"></span>
+        <span className="loading loading-bars loading-xl text-[#ef8220]"></span>
       </div>
     );
   }
@@ -62,7 +63,7 @@ const Dashboard = () => {
           md:translate-x-0 md:fixed md:flex-shrink-0
         `}
       >
-        <h2 className="text-2xl font-bold text-[#629D23] text-center mb-6">Dashboard</h2>
+        <h2 className="text-2xl font-bold text-[#ef8220] text-center mb-6">Dashboard</h2>
 
         {/* Role-specific menu */}
         <nav className="flex flex-col space-y-3">
@@ -71,10 +72,9 @@ const Dashboard = () => {
               key={idx}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 p-3 border rounded transition ${
-                  isActive
-                    ? 'bg-green-200 text-black border-[#629D23] font-semibold'
-                    : 'text-gray-700 border-gray-300 hover:bg-green-100'
+                `flex items-center gap-3 p-3 border rounded transition ${isActive
+                  ? 'bg-green-200 text-black border-[#629D23] font-semibold'
+                  : 'text-gray-700 border-gray-300 hover:bg-green-100'
                 }`
               }
               onClick={() => setSidebarOpen(false)}
@@ -92,10 +92,9 @@ const Dashboard = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex items-center gap-3 p-3 border rounded transition ${
-                isActive
-                  ? 'bg-green-200 text-[#629D23] border-[#629D23] font-semibold'
-                  : 'text-gray-700 border-gray-300 hover:bg-green-100'
+              `flex items-center gap-3 p-3 border rounded transition ${isActive
+                ? 'bg-green-200 text-[#629D23] border-[#629D23] font-semibold'
+                : 'text-gray-700 border-gray-300 hover:bg-green-100'
               }`
             }
             onClick={() => setSidebarOpen(false)}
@@ -106,10 +105,9 @@ const Dashboard = () => {
           <NavLink
             to="/logout"
             className={({ isActive }) =>
-              `flex items-center gap-3 p-3 border rounded transition ${
-                isActive
-                  ? 'bg-green-200 text-[#629D23] border-[#629D23] font-semibold'
-                  : 'text-gray-700 border-gray-300 hover:bg-green-100'
+              `flex items-center gap-3 p-3 border rounded transition ${isActive
+                ? 'bg-green-200 text-[#629D23] border-[#629D23] font-semibold'
+                : 'text-gray-700 border-gray-300 hover:bg-green-100'
               }`
             }
             onClick={() => setSidebarOpen(false)}

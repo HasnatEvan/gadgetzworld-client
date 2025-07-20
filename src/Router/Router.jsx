@@ -20,6 +20,7 @@ import EditInventory from "../pages/Admin/MyInventory/EditInventory";
 import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import TrackOrder from "../pages/HomePage/Track Order/TrackOrder";
+import AddBanner from "../pages/Admin/AddBanner/AddBanner";
 
 
 
@@ -90,6 +91,10 @@ export const router = createBrowserRouter([
         path: 'edit-products/:id',
         element: <AdminRoute><PrivateRoute><EditInventory></EditInventory></PrivateRoute></AdminRoute>
       },
+      {
+        path:'/dashboard/add-banner',
+        element:<AddBanner></AddBanner>
+      }
 
     ]
   }

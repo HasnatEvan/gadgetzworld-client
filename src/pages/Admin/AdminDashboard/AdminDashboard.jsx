@@ -20,7 +20,7 @@ import {
   Legend,
 } from "recharts";
 
-import CountUp from "react-countup";  // <-- নতুন যোগ
+import CountUp from "react-countup";
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -60,40 +60,44 @@ const AdminDashboard = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
         {[
           {
-            icon: <FaUsers className="text-3xl text-[#629D23] mx-auto mb-2" />,
+            icon: <FaUsers className="text-3xl text-[#ef8220] mx-auto mb-2" />,
             title: "Total Users",
             value: stats.totalUsers,
           },
           {
-            icon: <FaBoxOpen className="text-3xl text-[#629D23] mx-auto mb-2" />,
+            icon: <FaBoxOpen className="text-3xl text-[#ef8220] mx-auto mb-2" />,
             title: "Total Products",
             value: stats.totalProducts,
           },
           {
-            icon: <FaShoppingCart className="text-3xl text-[#629D23] mx-auto mb-2" />,
+            icon: (
+              <FaShoppingCart className="text-3xl text-[#ef8220] mx-auto mb-2" />
+            ),
             title: "Total Orders",
             value: stats.totalOrders,
           },
           {
-            icon: <FaHeart className="text-3xl text-[#629D23] mx-auto mb-2" />,
+            icon: <FaHeart className="text-3xl text-[#ef8220] mx-auto mb-2" />,
             title: "Total Wishlist",
             value: stats.totalWishlist,
           },
           {
-            icon: <FaDollarSign className="text-3xl text-[#629D23] mx-auto mb-2" />,
+            icon: (
+              <FaDollarSign className="text-3xl text-[#ef8220] mx-auto mb-2" />
+            ),
             title: "Total Sell",
             value: stats.overallTotalSell || 0,
             isCurrency: true,
           },
           {
-            icon: <FaTag className="text-3xl text-[#629D23] mx-auto mb-2" />,
+            icon: <FaTag className="text-3xl text-[#ef8220] mx-auto mb-2" />,
             title: "Discount Items",
             value: stats.totalDiscountItems || 0,
           },
         ].map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md p-5 text-center border-t-4 border-[#629D23]"
+            className="bg-white rounded-xl shadow-md p-5 text-center border-t-4 border-[#ef8220]"
           >
             {item.icon}
             <h3 className="text-lg md:text-xl font-semibold">{item.title}</h3>
@@ -115,7 +119,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Last 30 Days Orders Chart */}
-      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#629D23]">
+      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#ef8220]">
         <h3 className="text-lg md:text-xl font-semibold mb-4 text-center">
           Last 30 Days Orders Overview
         </h3>
@@ -130,14 +134,14 @@ const AdminDashboard = () => {
               <YAxis allowDecimals={false} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="orders" name="Orders" fill="#629D23" barSize={40} />
+              <Bar dataKey="orders" name="Orders" fill="#ef8220" barSize={40} />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       {/* Last 30 Days Sell Chart */}
-      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#1D6F9A]">
+      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#ef8220]">
         <h3 className="text-lg md:text-xl font-semibold mb-4 text-center">
           Last 30 Days Sell Overview
         </h3>
@@ -155,7 +159,7 @@ const AdminDashboard = () => {
               <Bar
                 dataKey="totalSell"
                 name="Total Sell"
-                fill="#1D6F9A"
+                fill="#ef8220"
                 barSize={40}
               />
             </BarChart>

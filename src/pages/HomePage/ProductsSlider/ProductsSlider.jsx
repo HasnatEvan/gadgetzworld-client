@@ -57,7 +57,7 @@ const ProductsSlider = () => {
                 </h3>
                 <p
                   className={`font-medium text-xs sm:text-sm ${
-                    product.quantity > 0 ? "text-green-600" : "text-red-600"
+                    product.quantity > 0 ? "text-[#ef8220]" : "text-red-600"
                   }`}
                 >
                   {product.quantity > 0 ? `${product.quantity} ITEMS` : "Out of stock"}

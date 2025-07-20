@@ -13,8 +13,7 @@ import {
   FaWhatsapp,
 } from "react-icons/fa";
 
-import logo from '../../src/assets/Logo/logo.jpg';
-
+import logo from "../../src/assets/Logo/logo.jpg";
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
@@ -49,10 +48,9 @@ const Navbar = () => {
   return (
     <div className="font-sans relative">
       {/* Mobile Topbar */}
-      <div className="block md:hidden bg-white text-gray-800 text-sm px-4 py-2 text-center border-b border-gray-200">
-        <p>Welcome to our GadgetzWorld!</p>
-        {/* Social Icons */}
-        <div className="flex justify-center mt-2 space-x-4 text-xl">
+      <div className="block md:hidden bg-white text-gray-800 text-sm px-4 pt-2 text-center border-b border-gray-200">
+        <p className="mt-2">Welcome to our GadgetzWorld!</p>
+        <div className="flex justify-center mt-2  space-x-4 text-xl">
           <a
             href="https://facebook.com"
             target="_blank"
@@ -104,9 +102,9 @@ const Navbar = () => {
       <div className="bg-white text-gray-800 px-4 py-4 flex flex-col md:flex-row items-center justify-between border-b border-gray-100 gap-4">
         {/* Logo (Desktop Only) */}
         <div className="hidden md:flex items-center space-x-2">
-          <img src={logo} alt="logo" className="w-10 h-10" />
+          <img src={logo} alt="logo" className="w-20 h-20" />
           <h1 className="text-2xl font-bold whitespace-nowrap">
-            <span className="text-[#629D23]">𝑮𝒂𝒅𝒈𝒆𝒕𝒛</span>𝑾𝒐𝒓𝒍𝒅
+            <span className="text-[#ef8220]">𝙶𝚊𝚍𝚐𝚎𝚝𝚣 </span>𝚆𝚘𝚛𝚕𝚍
           </h1>
         </div>
 
@@ -115,7 +113,7 @@ const Navbar = () => {
           {user ? (
             <button
               onClick={handleLogout}
-              className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#629D23] transition bg-transparent border border-gray-300 rounded"
+              className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#ef8220] transition bg-transparent border border-gray-300 rounded"
             >
               <FaUser />
               <span>Logout</span>
@@ -123,7 +121,7 @@ const Navbar = () => {
           ) : (
             <NavLink
               to="/login"
-              className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#629D23] transition"
+              className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#ef8220] transition"
             >
               <FaUser />
               <span>Account</span>
@@ -132,11 +130,11 @@ const Navbar = () => {
 
           <NavLink
             to="/wishlist"
-            className="text-gray-800 px-4 py-2 flex items-center space-x-2 relative hover:text-[#629D23] transition"
+            className="text-gray-800 px-4 py-2 flex items-center space-x-2 relative hover:text-[#ef8220] transition"
           >
             <FaHeart />
             <span>Wishlist</span>
-            <span className="absolute -top-1 -right-2 bg-[#629D23] text-white text-xs px-1 rounded-full">
+            <span className="absolute -top-1 -right-2 bg-[#ef8220] text-white text-xs px-1 rounded-full">
               {wishlist.length}
             </span>
           </NavLink>
@@ -144,9 +142,10 @@ const Navbar = () => {
       </div>
 
       {/* Bottom Navigation */}
-      <div className="bg-[#629D23] text-white px-4 py-3 -mt-6 lg:mt-2 flex justify-between items-center">
-        <h2 className="text-lg font-semibold text-white whitespace-nowrap md:hidden">
-          𝑮𝒂𝒅𝒈𝒆𝒕𝒛𝑾𝒐𝒓𝒍𝒅
+      <div className="bg-[#ef8220] text-white px-4 py-3 -mt-4 flex justify-between items-center">
+        {/* Mobile Logo */}
+        <h2 className="text-xl font-bold md:hidden text-white">
+          𝙶𝚊𝚍𝚐𝚎𝚝𝚣 <span className="text-white">𝚆𝚘𝚛𝚕𝚍</span>
         </h2>
 
         <button
@@ -157,25 +156,27 @@ const Navbar = () => {
           {menuOpen ? <FaTimes /> : <FaBars />}
         </button>
 
+        {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 font-semibold text-lg">
-          <NavLink to="/" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink to="/" className="flex items-center space-x-1 hover:text-[#0f0f0e]">
             <FaHome />
             <span>Home</span>
           </NavLink>
-          <NavLink to="/about" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink to="/about" className="flex items-center space-x-1 hover:text-[#151514]">
             <FaInfoCircle />
             <span>About</span>
           </NavLink>
-          <NavLink to="/dashboard" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink to="/dashboard" className="flex items-center space-x-1 hover:text-[#121212]">
             <FaTachometerAlt />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink to="/contact" className="flex items-center space-x-1 hover:text-white/80">
+          <NavLink to="/contact" className="flex items-center space-x-1 hover:text-[#050404]">
             <FaEnvelope />
             <span>Contact</span>
           </NavLink>
         </nav>
 
+        {/* Desktop Address */}
         <div className="hidden md:flex items-center text-sm text-right text-white/90">
           <FaMapMarkerAlt className="mr-2" />
           <span>
@@ -194,9 +195,8 @@ const Navbar = () => {
       )}
 
       <aside
-        className={`fixed top-0 right-0 h-full w-64 bg-white text-gray-800 shadow-lg transform transition-transform duration-300 z-50 md:hidden ${
-          menuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`fixed top-0 right-0 h-full w-64 bg-white text-gray-800 shadow-lg transform transition-transform duration-300 z-50 md:hidden ${menuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
         aria-label="Mobile menu"
       >
         <div className="flex justify-end items-center p-4 border-b border-gray-200">
@@ -210,19 +210,19 @@ const Navbar = () => {
         </div>
 
         <nav className="flex flex-col p-4 space-y-4 font-semibold text-lg">
-          <NavLink to="/" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink to="/" className="flex items-center space-x-2 hover:text-[#151312]">
             <FaHome />
             <span>Home</span>
           </NavLink>
-          <NavLink to="/about" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink to="/about" className="flex items-center space-x-2 hover:text-[#1c1c1b]">
             <FaInfoCircle />
             <span>About</span>
           </NavLink>
-          <NavLink to="/dashboard" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink to="/dashboard" className="flex items-center space-x-2 hover:text-[#060606]">
             <FaTachometerAlt />
             <span>Dashboard</span>
           </NavLink>
-          <NavLink to="/contact" className="flex items-center space-x-2 hover:text-[#629D23]">
+          <NavLink to="/contact" className="flex items-center space-x-2 hover:text-[#212121]">
             <FaEnvelope />
             <span>Contact</span>
           </NavLink>
@@ -238,7 +238,10 @@ const Navbar = () => {
               <span>Logout</span>
             </button>
           ) : (
-            <NavLink to="/login" className="flex items-center space-x-2 hover:text-[#629D23]">
+            <NavLink
+              to="/login"
+              className="flex items-center space-x-2 hover:text-[#ef8220]"
+            >
               <FaUser />
               <span>Account</span>
             </NavLink>
@@ -246,11 +249,11 @@ const Navbar = () => {
 
           <NavLink
             to="/wishlist"
-            className="flex items-center space-x-2 relative hover:text-[#629D23]"
+            className="flex items-center space-x-2 relative hover:text-[#ef8220]"
           >
             <FaHeart />
             <span>Wishlist</span>
-            <span className="absolute -top-1 -right-2 bg-[#629D23] text-white text-xs px-1 rounded-full">
+            <span className="absolute -top-1 -right-2 bg-[#ef8220] text-white text-xs px-1 rounded-full">
               {wishlist.length}
             </span>
           </NavLink>

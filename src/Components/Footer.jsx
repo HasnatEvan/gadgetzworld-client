@@ -12,33 +12,32 @@ import logo from "../../src/assets/Logo/logo.jpg";
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-600 pt-8 pb-2 border-t border-gray-300 px-4">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+    <footer className="bg-white text-gray-600 pt-6 pb-4 border-t border-gray-300 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 sm:gap-10">
         {/* Company Info with Logo */}
-        <div className="flex flex-col items-center sm:items-start space-y-3">
-          <div className="flex items-center space-x-3">
+        <div className="flex flex-col items-center sm:items-start space-y-4">
+          <div className="flex items-center justify-center sm:justify-start">
             <img
               src={logo}
               alt="GadgetzWorld Logo"
-              className="w-12 h-12 object-contain"
+              className="w-20 h-20 sm:w-24 sm:h-24 object-contain rounded-full"
             />
-            <h2 className="text-xl font-bold">𝑮𝒂𝒅𝒈𝒆𝒕𝒛𝑾𝒐𝒓𝒍𝒅</h2>
           </div>
-          <div className="text-sm text-center sm:text-left space-y-1">
+          <div className="text-sm text-center sm:text-left space-y-2">
             <p>
               Contact:{" "}
               <a
                 href="tel:+8801814197707"
-                className="hover:text-black transition"
+                className="hover:text-[#ef8220] transition"
               >
-                +880 1814 197 707
+                +8801814197707
               </a>
             </p>
             <p>
               Email:{" "}
               <a
                 href="mailto:your.email@example.com"
-                className="hover:text-black transition"
+                className="hover:text-[#ef8220] transition"
               >
                 your.email@example.com
               </a>
@@ -48,42 +47,50 @@ const Footer = () => {
 
         {/* Navigation */}
         <div className="flex flex-col items-center sm:items-start space-y-3">
-          <h3 className="font-semibold text-lg text-[#629D23] mb-1">Quick Link</h3>
+          <h3 className="font-semibold text-base sm:text-lg text-[#ef8220] mb-2">
+            Quick Link
+          </h3>
           <Link
             to="/"
-            className="hover:text-black transition flex items-center space-x-2"
+            className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
           >
-            <FaHome /> <span>Home</span>
+            <FaHome className="text-[#ef8220] hover:text-black transition" />
+            <span>Home</span>
           </Link>
           <Link
             to="/about"
-            className="hover:text-black transition flex items-center space-x-2"
+            className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
           >
-            <FaInfoCircle /> <span>About</span>
+            <FaInfoCircle className="text-[#ef8220] hover:text-black transition" />
+            <span>About</span>
           </Link>
           <Link
             to="/dashboard"
-            className="hover:text-black transition flex items-center space-x-2"
+            className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
           >
-            <FaTachometerAlt /> <span>Dashboard</span>
+            <FaTachometerAlt className="text-[#ef8220] hover:text-black transition" />
+            <span>Dashboard</span>
           </Link>
           <Link
             to="/contact"
-            className="hover:text-black transition flex items-center space-x-2"
+            className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
           >
-            <FaPhone /> <span>Contact</span>
+            <FaPhone className="text-[#ef8220] hover:text-black transition" />
+            <span>Contact</span>
           </Link>
         </div>
 
         {/* Social Icons */}
         <div className="flex flex-col items-center sm:items-start space-y-3">
-          <h3 className="font-semibold text-lg text-[#629D23] mb-1">Follow Us</h3>
-          <div className="flex space-x-6 text-2xl">
+          <h3 className="font-semibold text-base sm:text-lg text-[#ef8220] mb-2">
+            Follow Us
+          </h3>
+          <div className="flex space-x-4 sm:space-x-6 text-xl sm:text-2xl">
             <a
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-black transition"
+              className="text-blue-600 hover:text-blue-800 transition"
               aria-label="Facebook"
             >
               <FaFacebookF />
@@ -92,14 +99,14 @@ const Footer = () => {
               href="https://wa.me/01814197707"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-black transition"
+              className="text-green-500 hover:text-green-700 transition"
               aria-label="WhatsApp"
             >
               <FaWhatsapp />
             </a>
             <a
               href="mailto:your.email@example.com"
-              className="hover:text-black transition"
+              className="text-red-600 hover:text-red-800 transition"
               aria-label="Email"
             >
               <FaEnvelope />
@@ -109,8 +116,8 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <div className="max-w-7xl mx-auto mt-10 border-t border-gray-300 pt-4 text-center text-sm text-gray-500">
-        &copy; {new Date().getFullYear()} 𝑮𝒂𝒅𝒈𝒆𝒕𝒛𝑾𝒐𝒓𝒍𝒅. All rights reserved.
+      <div className="max-w-7xl mx-auto mt-8 border-t border-gray-300 pt-4 text-center text-xs sm:text-sm text-gray-500">
+        © {new Date().getFullYear()} 𝑮𝒂𝒅𝒈𝒆𝒕𝒛𝑾𝒐𝒓𝒍𝒅. All rights reserved.
       </div>
     </footer>
   );
