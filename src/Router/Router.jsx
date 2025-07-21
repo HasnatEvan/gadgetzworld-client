@@ -21,6 +21,7 @@ import PrivateRoute from "./PrivateRoute";
 import AdminRoute from "./AdminRoute";
 import TrackOrder from "../pages/HomePage/Track Order/TrackOrder";
 import AddBanner from "../pages/Admin/AddBanner/AddBanner";
+import Contact from "../pages/ContactPage/COntact";
 
 
 
@@ -55,8 +56,16 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><ConfirmOrder></ConfirmOrder></PrivateRoute>
       },
       {
-        path:'/track-order',
-        element:<TrackOrder></TrackOrder>
+        path: '/track-order',
+        element: <TrackOrder></TrackOrder>
+      },
+      {
+        path: '/my-orders',
+        element: <PrivateRoute><MyOrder></MyOrder></PrivateRoute>
+      },
+      {
+        path: '/contact',
+        element: <Contact></Contact>
       }
     ],
   },
@@ -65,10 +74,7 @@ export const router = createBrowserRouter([
     element: <PrivateRoute><Dashboard></Dashboard>,</PrivateRoute>,
     children: [
 
-      {
-        path: '/dashboard/my-order',
-        element: <PrivateRoute><MyOrder></MyOrder></PrivateRoute>
-      },
+
       {
         path: '/dashboard/admin-dashboard',
         element: <AdminRoute> <PrivateRoute><AdminDashboard></AdminDashboard></PrivateRoute></AdminRoute>
@@ -92,8 +98,8 @@ export const router = createBrowserRouter([
         element: <AdminRoute><PrivateRoute><EditInventory></EditInventory></PrivateRoute></AdminRoute>
       },
       {
-        path:'/dashboard/add-banner',
-        element:<AddBanner></AddBanner>
+        path: '/dashboard/add-banner',
+        element: <AddBanner></AddBanner>
       }
 
     ]

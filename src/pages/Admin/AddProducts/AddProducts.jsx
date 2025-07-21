@@ -91,7 +91,7 @@ const AddProducts = () => {
   return (
     <div className="min-h-screen  text-gray-600 flex items-center justify-center px-2 sm:px-4">
       <div className="w-full max-w-3xl p-4 sm:p-6 md:p-8">
-        <h2 className="text-2xl sm:text-3xl font-bold text-center text-[#629D23] mb-6">
+        <h2 className="text-2xl sm:text-3xl font-bold text-center text-gray-600 mb-6">
           Add New Product
         </h2>
 
@@ -226,7 +226,7 @@ const AddProducts = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#629D23] text-white font-semibold py-3 rounded transition flex justify-center items-center gap-2"
+            className="w-full bg-[#ef8220] text-white font-semibold py-3 rounded transition flex justify-center items-center gap-2"
           >
             {loading && (
               <span className="loading loading-infinity loading-xl text-white"></span>

@@ -3,6 +3,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signOut,
   updateProfile,
@@ -43,6 +44,20 @@ const AuthProviders = ({ children }) => {
       photoURL,
     });
   };
+
+
+  const resetPassword = async (email) => {
+    setLoading(true);
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+    } catch (error) {
+      console.error("Reset password error:", error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   // Firebase auth state change listener
   useEffect(() => {
@@ -91,6 +106,7 @@ const AuthProviders = ({ children }) => {
     updateUserProfile,
     setLoading,
     setUser,
+    resetPassword
   };
 
   return (

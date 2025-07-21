@@ -5,18 +5,20 @@ import {
   FaBoxes,
   FaPlusCircle,
   FaTasks,
-
-  FaShoppingCart,
   FaBars,
   FaTimes,
   FaHome,
   FaSignOutAlt,
 } from 'react-icons/fa';
 import useRole from '../Hooks/useRole';
+import useAuth from '../Hooks/useAuth';
+import { toast } from 'react-toastify'; // ✅ Updated import
+import 'react-toastify/dist/ReactToastify.css'; // ✅ Make sure this is in your root component if not here
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [role, isLoading] = useRole();
+  const { logOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,23 +27,31 @@ const Dashboard = () => {
       if (role === 'admin') {
         navigate('/dashboard/admin-dashboard');
       } else {
-        navigate('/dashboard/my-order');
+        navigate('/');
       }
     }
   }, [role, isLoading, location.pathname, navigate]);
+
+  const handleLogout = async () => {
+    try {
+      await logOut();
+      toast.success('Logged out successfully');
+      navigate('/');
+    } catch (error) {
+      console.error(error);
+      toast.error('Logout failed');
+    }
+  };
 
   const adminMenu = [
     { name: 'Admin Panel', path: '/dashboard/admin-dashboard', icon: <FaUserShield /> },
     { name: 'Inventory Overview', path: '/dashboard/my-inventory', icon: <FaBoxes /> },
     { name: 'Add New Product', path: '/dashboard/add-product', icon: <FaPlusCircle /> },
-    { name: 'Add Banner', path: '/dashboard/add-banner', icon: <FaPlusCircle /> }, // new
+    { name: 'Add Banner', path: '/dashboard/add-banner', icon: <FaPlusCircle /> },
     { name: 'Manage Orders', path: '/dashboard/manage-orders', icon: <FaTasks /> },
   ];
 
-  const userMenu = [
-    { name: 'My Orders', path: '/dashboard/my-order', icon: <FaShoppingCart /> },
-  ];
-
+  const userMenu = [];
   const menuItems = role === 'admin' ? adminMenu : userMenu;
 
   if (isLoading) {
@@ -65,16 +75,16 @@ const Dashboard = () => {
       >
         <h2 className="text-2xl font-bold text-[#ef8220] text-center mb-6">Dashboard</h2>
 
-        {/* Role-specific menu */}
         <nav className="flex flex-col space-y-3">
           {menuItems.map((item, idx) => (
             <NavLink
               key={idx}
               to={item.path}
               className={({ isActive }) =>
-                `flex items-center gap-3 p-3 border rounded transition ${isActive
-                  ? 'bg-green-200 text-black border-[#629D23] font-semibold'
-                  : 'text-gray-700 border-gray-300 hover:bg-green-100'
+                `flex items-center gap-3 p-3 border rounded transition ${
+                  isActive
+                    ? 'bg-green-200 text-black font-semibold'
+                    : 'text-gray-700 border-gray-300 hover:bg-green-100'
                 }`
               }
               onClick={() => setSidebarOpen(false)}
@@ -92,9 +102,10 @@ const Dashboard = () => {
           <NavLink
             to="/"
             className={({ isActive }) =>
-              `flex items-center gap-3 p-3 border rounded transition ${isActive
-                ? 'bg-green-200 text-[#629D23] border-[#629D23] font-semibold'
-                : 'text-gray-700 border-gray-300 hover:bg-green-100'
+              `flex items-center gap-3 p-3 border rounded transition ${
+                isActive
+                  ? 'bg-green-200 text-[#ef8220] font-semibold'
+                  : 'text-gray-700 border-gray-300 hover:bg-green-100'
               }`
             }
             onClick={() => setSidebarOpen(false)}
@@ -102,32 +113,28 @@ const Dashboard = () => {
             <FaHome className="text-lg" />
             <span>Home</span>
           </NavLink>
-          <NavLink
-            to="/logout"
-            className={({ isActive }) =>
-              `flex items-center gap-3 p-3 border rounded transition ${isActive
-                ? 'bg-green-200 text-[#629D23] border-[#629D23] font-semibold'
-                : 'text-gray-700 border-gray-300 hover:bg-green-100'
-              }`
-            }
-            onClick={() => setSidebarOpen(false)}
+
+          {/* 🔸 Logout Button */}
+          <button
+            onClick={handleLogout}
+            className="flex items-center gap-3 p-3 border border-gray-300 rounded text-gray-700 hover:bg-green-100 transition"
           >
             <FaSignOutAlt className="text-lg" />
             <span>Logout</span>
-          </NavLink>
+          </button>
         </nav>
       </aside>
 
-      {/* Hamburger Menu for Mobile */}
+      {/* Hamburger Menu */}
       <button
-        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded bg-[#629D23] text-white"
+        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded bg-[#ef8220] text-white"
         onClick={() => setSidebarOpen(!sidebarOpen)}
         aria-label="Toggle Sidebar"
       >
         {sidebarOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
       </button>
 
-      {/* Overlay for mobile when sidebar open */}
+      {/* Overlay */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black opacity-30 z-20 md:hidden"

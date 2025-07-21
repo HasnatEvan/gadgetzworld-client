@@ -21,6 +21,7 @@ import {
 } from "recharts";
 
 import CountUp from "react-countup";
+import { Link } from "react-router-dom";  // Import Link here
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -54,66 +55,95 @@ const AdminDashboard = () => {
     }
   }
 
+  const statsItems = [
+    {
+      icon: <FaUsers className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      title: "Total Users",
+      value: stats.totalUsers,
+      link: "/dashboard/users",  // Add link here
+    },
+    {
+      icon: <FaBoxOpen className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      title: "Total Products",
+      value: stats.totalProducts,
+    },
+    {
+      icon: (
+        <FaShoppingCart className="text-3xl text-[#ef8220] mx-auto mb-2" />
+      ),
+      title: "Total Orders",
+      value: stats.totalOrders,
+    },
+    {
+      icon: <FaHeart className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      title: "Total Wishlist",
+      value: stats.totalWishlist,
+    },
+    {
+      icon: (
+        <FaDollarSign className="text-3xl text-[#ef8220] mx-auto mb-2" />
+      ),
+      title: "Total Sell",
+      value: stats.overallTotalSell || 0,
+      isCurrency: true,
+    },
+    {
+      icon: <FaTag className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      title: "Discount Items",
+      value: stats.totalDiscountItems || 0,
+    },
+  ];
+
   return (
     <div className="p-4 md:p-6 lg:p-8 text-gray-700 space-y-10">
       {/* Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
-        {[
-          {
-            icon: <FaUsers className="text-3xl text-[#ef8220] mx-auto mb-2" />,
-            title: "Total Users",
-            value: stats.totalUsers,
-          },
-          {
-            icon: <FaBoxOpen className="text-3xl text-[#ef8220] mx-auto mb-2" />,
-            title: "Total Products",
-            value: stats.totalProducts,
-          },
-          {
-            icon: (
-              <FaShoppingCart className="text-3xl text-[#ef8220] mx-auto mb-2" />
-            ),
-            title: "Total Orders",
-            value: stats.totalOrders,
-          },
-          {
-            icon: <FaHeart className="text-3xl text-[#ef8220] mx-auto mb-2" />,
-            title: "Total Wishlist",
-            value: stats.totalWishlist,
-          },
-          {
-            icon: (
-              <FaDollarSign className="text-3xl text-[#ef8220] mx-auto mb-2" />
-            ),
-            title: "Total Sell",
-            value: stats.overallTotalSell || 0,
-            isCurrency: true,
-          },
-          {
-            icon: <FaTag className="text-3xl text-[#ef8220] mx-auto mb-2" />,
-            title: "Discount Items",
-            value: stats.totalDiscountItems || 0,
-          },
-        ].map((item, index) => (
+        {statsItems.map((item, index) => (
           <div
             key={index}
             className="bg-white rounded-xl shadow-md p-5 text-center border-t-4 border-[#ef8220]"
           >
             {item.icon}
             <h3 className="text-lg md:text-xl font-semibold">{item.title}</h3>
-            <p className="text-xl md:text-2xl font-bold">
-              {item.isCurrency ? (
-                <CountUp
-                  start={0}
-                  end={item.value}
-                  duration={2}
-                  separator=","
-                  prefix="৳ "
-                />
-              ) : (
-                <CountUp start={0} end={item.value} duration={2} separator="," />
-              )}
-            </p>
+
+            {/* If item has a link, wrap value with Link */}
+            {item.link ? (
+              <Link
+                to={item.link}
+                className="text-xl md:text-2xl font-bold hover:text-[#d66f00] transition"
+              >
+                {item.isCurrency ? (
+                  <CountUp
+                    start={0}
+                    end={item.value}
+                    duration={2}
+                    separator=","
+                    prefix="৳ "
+                  />
+                ) : (
+                  <CountUp
+                    start={0}
+                    end={item.value}
+                    duration={2}
+                    separator=","
+                  />
+                )}
+              </Link>
+            ) : (
+              <p className="text-xl md:text-2xl font-bold">
+                {item.isCurrency ? (
+                  <CountUp
+                    start={0}
+                    end={item.value}
+                    duration={2}
+                    separator=","
+                    prefix="৳ "
+                  />
+                ) : (
+                  <CountUp start={0} end={item.value} duration={2} separator="," />
+                )}
+              </p>
+            )}
           </div>
         ))}
       </div>
