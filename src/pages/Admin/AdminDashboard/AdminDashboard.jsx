@@ -7,7 +7,9 @@ import {
   FaHeart,
   FaSpinner,
   FaDollarSign,
-  FaTag,
+  FaTags,
+  FaBullhorn,
+  FaImages,
 } from "react-icons/fa";
 import {
   BarChart,
@@ -19,9 +21,8 @@ import {
   CartesianGrid,
   Legend,
 } from "recharts";
-
 import CountUp from "react-countup";
-import { Link } from "react-router-dom";  // Import Link here
+import { Link } from "react-router-dom";
 
 const AdminDashboard = () => {
   const axiosSecure = useAxiosSecure();
@@ -43,7 +44,6 @@ const AdminDashboard = () => {
     );
   }
 
-  // Chart Data তৈরি
   const chartData = [];
   if (stats.orderCounts && stats.sellCounts) {
     for (const [date, orderCount] of Object.entries(stats.orderCounts)) {
@@ -57,40 +57,49 @@ const AdminDashboard = () => {
 
   const statsItems = [
     {
-      icon: <FaUsers className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      icon: <FaUsers className="text-3xl text-[#4cb648] mx-auto mb-2" />,
       title: "Total Users",
       value: stats.totalUsers,
-      link: "/dashboard/users",  // Add link here
+      link: "/dashboard/users",
     },
     {
-      icon: <FaBoxOpen className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      icon: <FaBoxOpen className="text-3xl text-[#4cb648] mx-auto mb-2" />,
       title: "Total Products",
       value: stats.totalProducts,
     },
     {
-      icon: (
-        <FaShoppingCart className="text-3xl text-[#ef8220] mx-auto mb-2" />
-      ),
+      icon: <FaShoppingCart className="text-3xl text-[#4cb648] mx-auto mb-2" />,
       title: "Total Orders",
       value: stats.totalOrders,
+      link: "/dashboard/manage-orders",
     },
     {
-      icon: <FaHeart className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      icon: <FaHeart className="text-3xl text-[#4cb648] mx-auto mb-2" />,
       title: "Total Wishlist",
       value: stats.totalWishlist,
     },
     {
-      icon: (
-        <FaDollarSign className="text-3xl text-[#ef8220] mx-auto mb-2" />
-      ),
+      icon: <FaDollarSign className="text-3xl text-[#4cb648] mx-auto mb-2" />,
       title: "Total Sell",
       value: stats.overallTotalSell || 0,
       isCurrency: true,
     },
     {
-      icon: <FaTag className="text-3xl text-[#ef8220] mx-auto mb-2" />,
+      icon: <FaTags className="text-3xl text-[#4cb648] mx-auto mb-2" />,
       title: "Discount Items",
       value: stats.totalDiscountItems || 0,
+    },
+    {
+      icon: <FaBullhorn className="text-3xl text-[#4cb648] mx-auto mb-2" />,
+      title: "Add-Marquee",
+      value: stats.totalMarquee || 0,
+      link: "/dashboard/marquee",
+    },
+    {
+      icon: <FaImages className="text-3xl text-[#4cb648] mx-auto mb-2" />,
+      title: "Add-Banners",
+      value: stats.totalBanner || 0,
+      link: "/dashboard/add-banner",
     },
   ];
 
@@ -101,12 +110,10 @@ const AdminDashboard = () => {
         {statsItems.map((item, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow-md p-5 text-center border-t-4 border-[#ef8220]"
+            className="bg-white rounded-xl shadow-md p-5 text-center border-t-4 border-[#4cb648]"
           >
             {item.icon}
             <h3 className="text-lg md:text-xl font-semibold">{item.title}</h3>
-
-            {/* If item has a link, wrap value with Link */}
             {item.link ? (
               <Link
                 to={item.link}
@@ -140,7 +147,12 @@ const AdminDashboard = () => {
                     prefix="৳ "
                   />
                 ) : (
-                  <CountUp start={0} end={item.value} duration={2} separator="," />
+                  <CountUp
+                    start={0}
+                    end={item.value}
+                    duration={2}
+                    separator=","
+                  />
                 )}
               </p>
             )}
@@ -149,7 +161,7 @@ const AdminDashboard = () => {
       </div>
 
       {/* Last 30 Days Orders Chart */}
-      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#ef8220]">
+      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#24365f]">
         <h3 className="text-lg md:text-xl font-semibold mb-4 text-center">
           Last 30 Days Orders Overview
         </h3>
@@ -164,14 +176,14 @@ const AdminDashboard = () => {
               <YAxis allowDecimals={false} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="orders" name="Orders" fill="#ef8220" barSize={40} />
+              <Bar dataKey="orders" name="Orders" fill="#24365f" barSize={40} />
             </BarChart>
           </ResponsiveContainer>
         </div>
       </div>
 
       {/* Last 30 Days Sell Chart */}
-      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#ef8220]">
+      <div className="bg-white rounded-xl shadow-md p-4 md:p-6 border-t-4 border-[#4cb648]">
         <h3 className="text-lg md:text-xl font-semibold mb-4 text-center">
           Last 30 Days Sell Overview
         </h3>
@@ -189,7 +201,7 @@ const AdminDashboard = () => {
               <Bar
                 dataKey="totalSell"
                 name="Total Sell"
-                fill="#ef8220"
+                fill="#4cb648"
                 barSize={40}
               />
             </BarChart>

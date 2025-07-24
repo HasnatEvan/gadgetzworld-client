@@ -12,8 +12,9 @@ import {
 } from 'react-icons/fa';
 import useRole from '../Hooks/useRole';
 import useAuth from '../Hooks/useAuth';
-import { toast } from 'react-toastify'; // ✅ Updated import
-import 'react-toastify/dist/ReactToastify.css'; // ✅ Make sure this is in your root component if not here
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import logo from "../../src/assets/Logo/logo.jpg";
 
 const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -47,7 +48,6 @@ const Dashboard = () => {
     { name: 'Admin Panel', path: '/dashboard/admin-dashboard', icon: <FaUserShield /> },
     { name: 'Inventory Overview', path: '/dashboard/my-inventory', icon: <FaBoxes /> },
     { name: 'Add New Product', path: '/dashboard/add-product', icon: <FaPlusCircle /> },
-    { name: 'Add Banner', path: '/dashboard/add-banner', icon: <FaPlusCircle /> },
     { name: 'Manage Orders', path: '/dashboard/manage-orders', icon: <FaTasks /> },
   ];
 
@@ -57,7 +57,7 @@ const Dashboard = () => {
   if (isLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <span className="loading loading-bars loading-xl text-[#ef8220]"></span>
+        <span className="loading loading-bars loading-xl text-[#4cb648]"></span>
       </div>
     );
   }
@@ -73,7 +73,10 @@ const Dashboard = () => {
           md:translate-x-0 md:fixed md:flex-shrink-0
         `}
       >
-        <h2 className="text-2xl font-bold text-[#ef8220] text-center mb-6">Dashboard</h2>
+        {/* Logo Instead of Text */}
+        <div className="flex justify-center mb-6">
+          <img src={logo} alt="Logo" className="w-24 h-auto rounded-full" />
+        </div>
 
         <nav className="flex flex-col space-y-3">
           {menuItems.map((item, idx) => (
@@ -114,7 +117,6 @@ const Dashboard = () => {
             <span>Home</span>
           </NavLink>
 
-          {/* 🔸 Logout Button */}
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 p-3 border border-gray-300 rounded text-gray-700 hover:bg-green-100 transition"
@@ -127,7 +129,7 @@ const Dashboard = () => {
 
       {/* Hamburger Menu */}
       <button
-        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded bg-[#ef8220] text-white"
+        className="md:hidden fixed top-4 left-4 z-40 p-2 rounded bg-[#4cb648] text-white"
         onClick={() => setSidebarOpen(!sidebarOpen)}
         aria-label="Toggle Sidebar"
       >

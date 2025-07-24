@@ -98,7 +98,7 @@ const AddBanner = () => {
           type="submit"
           disabled={uploading}
           className="w-full flex justify-center items-center gap-2
-            bg-[#ef8220] hover:bg-[#d06f15] text-white font-semibold
+            bg-[#4cb648] hover:bg-[#4cb648] text-white font-semibold
             py-3 px-6 rounded-xl transition duration-300
             disabled:opacity-50 disabled:cursor-not-allowed"
         >

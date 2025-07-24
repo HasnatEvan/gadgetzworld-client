@@ -1,3 +1,5 @@
+// src/components/Banner.jsx
+
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,7 +10,9 @@ const Banner = () => {
   const { data: banners = [], isLoading } = useQuery({
     queryKey: ["banners"],
     queryFn: async () => {
-      const { data } = await axios.get("https://gadgetzworld-server.vercel.app/banners");
+      const { data } = await axios.get(
+        "https://gadgetzworld-server.vercel.app/banners"
+      );
       return data;
     },
   });
@@ -27,6 +31,7 @@ const Banner = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     speed: 800,
+    cssEase: "ease-in-out",
     slidesToShow: 1,
     slidesToScroll: 1,
     arrows: false,
@@ -34,15 +39,16 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full mx-auto">
+    <div className="w-full overflow-hidden">
       <Slider {...settings}>
         {banners.map((banner, index) => (
-          <div key={index}>
+          <div key={index} className="relative">
             <img
               src={banner.image}
               alt={`Banner ${index + 1}`}
-              className="w-full h-[180px] sm:h-[250px] md:h-[350px] lg:h-[450px] xl:h-[550px] object-cover"
+              className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[600px] object-cover object-center"
             />
+
           </div>
         ))}
       </Slider>

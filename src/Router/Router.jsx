@@ -22,6 +22,8 @@ import AdminRoute from "./AdminRoute";
 import TrackOrder from "../pages/HomePage/Track Order/TrackOrder";
 import AddBanner from "../pages/Admin/AddBanner/AddBanner";
 import Contact from "../pages/ContactPage/COntact";
+import AllUsers from "../pages/Admin/AllUsers/AllUsers";
+import AddMarquee from "../pages/Admin/AddMarquee/AddMarquee";
 
 
 
@@ -100,6 +102,14 @@ export const router = createBrowserRouter([
       {
         path: '/dashboard/add-banner',
         element: <AddBanner></AddBanner>
+      },
+      {
+        path:'/dashboard/users',
+        element:<AllUsers></AllUsers>
+      },
+      {
+        path:'/dashboard/marquee',
+        element:<AddMarquee></AddMarquee>
       }
 
     ]

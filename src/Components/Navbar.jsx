@@ -19,7 +19,7 @@ import {
 import logo from "../../src/assets/Logo/logo.jpg";
 import mobileNavbarLogo from "../../src/assets/Logo/mobileNavbarLogo.png";
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
@@ -65,7 +65,7 @@ const Navbar = () => {
       <div className="block md:hidden bg-white text-gray-800 text-sm px-4 pt-2 text-center border-b border-gray-200">
         <p className="mt-2">Welcome to our GadgetzWorld!</p>
         <div className="flex justify-center mt-2 space-x-4 text-xl">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800" aria-label="Facebook">
+          <a href="https://www.facebook.com/share/15wotKbrH7" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800" aria-label="Facebook">
             <FaFacebookF />
           </a>
           <a
@@ -101,29 +101,29 @@ const Navbar = () => {
 
       {/* Middle Nav */}
       <div className="bg-white text-gray-800 px-4 py-4 flex flex-col md:flex-row items-center justify-between border-b border-gray-100 gap-4">
+      <Link to={'/'}>
         <div className="hidden md:flex items-center space-x-2">
-          <img src={logo} alt="logo" className="w-20 h-20" />
-          <h1 className="text-2xl font-bold whitespace-nowrap">
-            <span className="text-[#ef8220]">𝙶𝚊𝚍𝚐𝚎𝚝𝚣 </span>𝚆𝚘𝚛𝚕𝚍
-          </h1>
+          <img src={logo} alt="logo" className="w-20 h-12" />
+         
         </div>
+      </Link>
 
         <div className="hidden md:flex flex-wrap justify-end space-x-2">
           {user ? (
-            <button onClick={handleLogout} className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#ef8220] transition bg-transparent border border-gray-300 rounded">
+            <button onClick={handleLogout} className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#4cb648] transition bg-transparent border border-gray-300 rounded">
               <FaUser />
               <span>Logout</span>
             </button>
           ) : (
-            <NavLink to="/login" className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#ef8220] transition">
+            <NavLink to="/login" className="text-gray-800 px-4 py-2 flex items-center space-x-2 hover:text-[#4cb648] transition">
               <FaUser />
               <span>Account</span>
             </NavLink>
           )}
-          <NavLink to="/wishlist" className="text-gray-800 px-4 py-2 flex items-center space-x-2 relative hover:text-[#ef8220] transition">
+          <NavLink to="/wishlist" className="text-gray-800 px-4 py-2 flex items-center space-x-2 relative hover:text-[#4cb648] transition">
             <FaHeart />
             <span>Wishlist</span>
-            <span className="absolute -top-1 -right-2 bg-[#ef8220] text-white text-xs px-1 rounded-full">
+            <span className="absolute -top-1 -right-2 bg-[#4cb648] text-white text-xs px-1 rounded-full">
               {wishlist.length}
             </span>
           </NavLink>
@@ -133,7 +133,7 @@ const Navbar = () => {
       {/* Bottom Navigation */}
       <div className="bg-[#ef8220] text-white px-4 py-3 -mt-4 flex justify-between items-center">
         <h2 className="md:hidden">
-          <img src={mobileNavbarLogo} alt="Mobile Navbar Logo" className="w-32 mx-auto" />
+          <img src={mobileNavbarLogo} alt="Mobile Navbar Logo" className="w-24 mx-auto" />
         </h2>
         <button onClick={() => setMenuOpen(!menuOpen)} className="text-white text-2xl md:hidden" aria-label="Toggle menu">
           {menuOpen ? <FaTimes /> : <FaBars />}
@@ -187,7 +187,7 @@ const Navbar = () => {
           <NavLink to="/wishlist" className="flex items-center space-x-2 relative hover:text-[#ef8220]">
             <FaHeart />
             <span>Wishlist</span>
-            <span className="absolute -top-1 -right-2 bg-[#ef8220] text-white text-xs px-1 rounded-full">
+            <span className="absolute -top-1 -right-2 bg-[#4cb648] text-white text-xs px-1 rounded-full">
               {wishlist.length}
             </span>
           </NavLink>

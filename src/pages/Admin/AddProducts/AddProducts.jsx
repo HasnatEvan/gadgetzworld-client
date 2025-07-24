@@ -226,7 +226,7 @@ const AddProducts = () => {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-[#ef8220] text-white font-semibold py-3 rounded transition flex justify-center items-center gap-2"
+            className="w-full bg-[#4cb648] text-white font-semibold py-3 rounded transition flex justify-center items-center gap-2"
           >
             {loading && (
               <span className="loading loading-infinity loading-xl text-white"></span>

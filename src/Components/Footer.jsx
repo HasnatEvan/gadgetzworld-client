@@ -30,7 +30,7 @@ const Footer = () => {
             <p>
               Contact:{" "}
               <a
-                href="tel:+8801814197707"
+                href="tel:+8801607728405"
                 className="hover:text-[#ef8220] transition"
               >
                 +8801607728405
@@ -50,7 +50,7 @@ const Footer = () => {
 
         {/* Navigation */}
         <div className="flex flex-col items-center sm:items-start space-y-3">
-          <h3 className="font-semibold text-base sm:text-lg text-[#ef8220] mb-2">
+          <h3 className="font-semibold text-base sm:text-lg text-gray-600 mb-2">
             Quick Link
           </h3>
 
@@ -58,7 +58,7 @@ const Footer = () => {
             to="/"
             className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
           >
-            <FaHome className="text-[#ef8220] hover:text-black transition" />
+            <FaHome className="text-blue-500 hover:text-black transition" />
             <span>Home</span>
           </Link>
 
@@ -66,17 +66,16 @@ const Footer = () => {
             to="/about"
             className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
           >
-            <FaInfoCircle className="text-[#ef8220] hover:text-black transition" />
+            <FaInfoCircle className="text-purple-500 hover:text-black transition" />
             <span>About</span>
           </Link>
 
-          {/* Role-Based Dashboard/My Orders */}
           {role === "customer" ? (
             <Link
               to="/my-orders"
               className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
             >
-              <FaTachometerAlt className="text-[#ef8220] hover:text-black transition" />
+              <FaTachometerAlt className="text-yellow-500 hover:text-black transition" />
               <span>My Orders</span>
             </Link>
           ) : (
@@ -84,7 +83,7 @@ const Footer = () => {
               to="/dashboard"
               className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
             >
-              <FaTachometerAlt className="text-[#ef8220] hover:text-black transition" />
+              <FaTachometerAlt className="text-green-500 hover:text-black transition" />
               <span>Dashboard</span>
             </Link>
           )}
@@ -93,19 +92,19 @@ const Footer = () => {
             to="/contact"
             className="hover:text-[#ef8220] transition flex items-center space-x-2 text-sm sm:text-base"
           >
-            <FaPhone className="text-[#ef8220] hover:text-black transition" />
+            <FaPhone className="text-red-500 hover:text-black transition" />
             <span>Contact</span>
           </Link>
         </div>
 
         {/* Social Icons */}
         <div className="flex flex-col items-center sm:items-start space-y-3">
-          <h3 className="font-semibold text-base sm:text-lg text-[#ef8220] mb-2">
+          <h3 className="font-semibold text-base sm:text-lg text-gray-600 mb-2">
             Follow Us
           </h3>
           <div className="flex space-x-4 sm:space-x-6 text-xl sm:text-2xl">
             <a
-              href="https://facebook.com"
+              href="https://www.facebook.com/share/15wotKbrH7"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 hover:text-blue-800 transition"
@@ -135,7 +134,7 @@ const Footer = () => {
 
       {/* Copyright */}
       <div className="max-w-7xl mx-auto mt-8 border-t border-gray-300 pt-4 text-center text-xs sm:text-sm text-gray-500">
-        © {new Date().getFullYear()} 𝑮𝒂𝒅𝒈𝒆𝒕𝒛𝑾𝒐𝒓𝒍𝒅. All rights reserved.
+        © {new Date().getFullYear()} Gadget'z World. All rights reserved.
       </div>
     </footer>
   );

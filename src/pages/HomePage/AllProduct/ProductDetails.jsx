@@ -62,7 +62,7 @@ const ProductDetails = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 lg:gap-12">
         {/* Image Section */}
         <div className="relative">
-          <div className="absolute top-4 right-4 bg-[#ef8220] text-white px-3 py-1 rounded-full text-base sm:text-lg font-bold shadow-lg z-20 select-none">
+          <div className="absolute top-4 right-4 bg-[#4cb648] text-white px-3 py-1 rounded-full text-base sm:text-lg font-bold shadow-lg z-20 select-none">
             ৳{product.totalPrice.toLocaleString()}
           </div>
 
@@ -134,7 +134,7 @@ const ProductDetails = () => {
             {/* Quantity Info */}
             <section className="mt-6 sm:mt-8 text-gray-700 text-base space-y-4">
               <p className="flex items-center gap-2 sm:gap-3 font-medium text-sm sm:text-base">
-                <FaBoxes className="text-[#ef8220]" size={20} />
+                <FaBoxes className="text-[#4cb648]" size={20} />
                 Available Quantity:{" "}
                 <span className="text-base sm:text-lg">{product.quantity}</span>
               </p>

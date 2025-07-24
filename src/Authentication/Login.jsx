@@ -40,10 +40,13 @@ const Login = () => {
     setLoading(true);
     signIn(email, password)
       .then(() => {
-        toast.success('Login successful!');
+        toast.success('Login successful!', {
+          autoClose: 3000, // ৩ সেকেন্ডে চলে যাবে (3000 মিলিসেকেন্ড)
+        });
         setLoading(false);
         navigate('/');
       })
+
       .catch((error) => {
         const errorCode = error.code || '';
         let message = 'লগইন ব্যর্থ হয়েছে। আবার চেষ্টা করুন।';
@@ -200,7 +203,7 @@ const Login = () => {
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Don’t have an account?{' '}
-          <Link to="/signup" className="text-blue-600 font-medium hover:underline">
+          <Link to="/signup" className="text-[#4cb648] font-medium hover:underline">
             Sign Up
           </Link>
         </p>

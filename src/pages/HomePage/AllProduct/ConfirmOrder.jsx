@@ -136,6 +136,7 @@ const ConfirmOrder = () => {
                 },
                 orderDate: formattedDateTime,
                 status: "pending",
+                seller:product.seller?.email
             };
 
             // ✅ Step 1: Order Save
@@ -149,14 +150,14 @@ const ConfirmOrder = () => {
                 });
 
 
-                toast.success("✅ আপনার অর্ডার সফলভাবে নিশ্চিত হয়েছে!");
+                toast.success(" আপনার অর্ডার সফলভাবে নিশ্চিত হয়েছে!");
                 navigate("/");
             } else {
-                toast.error("❌ অর্ডার জমা দিতে সমস্যা হয়েছে।");
+                toast.error(" অর্ডার জমা দিতে সমস্যা হয়েছে।");
             }
         } catch (err) {
             console.error(err);
-            toast.error("❌ কিছু ভুল হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
+            toast.error("কিছু ভুল হয়েছে। অনুগ্রহ করে আবার চেষ্টা করুন।");
         } finally {
             setIsProcessing(false);
         }
