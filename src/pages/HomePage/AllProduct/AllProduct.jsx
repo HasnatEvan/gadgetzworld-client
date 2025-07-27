@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useState } from "react";
 import ProductCard from "./ProductCard";
+import { FaExclamationTriangle } from "react-icons/fa";
 
 const AllProduct = () => {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -17,10 +18,7 @@ const AllProduct = () => {
   });
 
   // ইউনিক ক্যাটাগরি লিস্ট তৈরি
-  const categories = [
-    "All",
-    ...new Set(products.map((product) => product.category)),
-  ];
+  const categories = ["All", ...new Set(products.map((product) => product.category))];
 
   // ফিল্টারড প্রোডাক্টস: ক্যাটাগরি আর সার্চ টার্ম মিলিয়ে
   const filteredProducts = products.filter((product) => {
@@ -40,11 +38,21 @@ const AllProduct = () => {
     );
   }
 
- 
+  // যদি একটাও প্রোডাক্ট না থাকে, তখন শুধু লেখাটা দেখাবে
+  if (filteredProducts.length === 0) {
+    return (
+      <div className="flex flex-col justify-center items-center text-gray-500 text-lg min-h-screen gap-2">
+        <FaExclamationTriangle className="text-yellow-500 text-5xl mb-2" />
+        <p>No products found!</p>
+      </div>
+
+
+    );
+  }
 
   return (
     <div>
-      {/* ফিল্টার সেকশন: সব ডিভাইসে পাশে পাশে থাকবে */}
+      {/* ফিল্টার সেকশন */}
       <div className="p-4 text-black flex flex-row flex-wrap items-center gap-4">
         {/* ক্যাটাগরি ড্রপডাউন */}
         <div>
@@ -75,10 +83,12 @@ const AllProduct = () => {
       </div>
 
       {/* প্রোডাক্টস গ্রিড */}
-      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 p-4">
-        {filteredProducts.map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+      <div className="p-4">
+        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+          {filteredProducts.map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
+        </div>
       </div>
     </div>
   );

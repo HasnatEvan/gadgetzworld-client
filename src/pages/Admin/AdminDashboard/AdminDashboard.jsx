@@ -77,6 +77,8 @@ const AdminDashboard = () => {
       icon: <FaHeart className="text-3xl text-[#4cb648] mx-auto mb-2" />,
       title: "Total Wishlist",
       value: stats.totalWishlist,
+      link: "/dashboard/all-wishlist",
+
     },
     {
       icon: <FaDollarSign className="text-3xl text-[#4cb648] mx-auto mb-2" />,

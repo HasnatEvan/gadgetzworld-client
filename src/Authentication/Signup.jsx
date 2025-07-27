@@ -18,32 +18,41 @@ const Signup = () => {
   const { createUser, updateUserProfile } = useAuth();
   const [loading, setLoading] = useState(false);
 
-  const handleSignup = async (event) => {
-    event.preventDefault();
-    const form = event.target;
-    const name = form.name.value;
-    const email = form.email.value;
-    const password = form.password.value;
+const handleSignup = async (event) => {
+  event.preventDefault();
+  const form = event.target;
+  const name = form.name.value;
+  const email = form.email.value;
+  const password = form.password.value;
 
-    setLoading(true);
+  setLoading(true);
 
-    try {
-      await createUser(email, password);
-      await updateUserProfile(name);
+  try {
+    await createUser(email, password);
+    await updateUserProfile(name);
 
-      // Save user to database
-      const userData = { name, email };
-      await axios.post(`https://gadgetzworld-server.vercel.app/users/${email}`, userData);
+    // Save user to database
+    const userData = { name, email };
+    await axios.post(`https://gadgetzworld-server.vercel.app/users/${email}`, userData);
 
-      toast.success('Account created successfully!');
-      form.reset();
-      navigate('/');
-    } catch (error) {
-      toast.error(`Signup failed: ${error.message}`);
-    } finally {
-      setLoading(false);
+    toast.success('অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে!');
+    form.reset();
+    navigate('/');
+  } catch (error) {
+    // MongoDB duplicate key error code 11000 ধরার উদাহরণ
+    if (error.response?.data?.code === 11000) {
+      toast.error('এই ইমেইল ইতোমধ্যে ব্যবহৃত হয়েছে।');
+    } else if (error.message.includes("auth/email-already-in-use")) {
+      // যদি Firebase createUser এর এরর মেসেজ হয়
+      toast.error('এই ইমেইল ইতোমধ্যে ব্যবহৃত হয়েছে।');
+    } else {
+      toast.error(`সাইনআপ ব্যর্থ: ${error.message}`);
     }
-  };
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gray-100 px-4 py-10">

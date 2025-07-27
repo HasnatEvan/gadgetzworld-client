@@ -102,7 +102,7 @@ const ProductDetails = () => {
             {/* Stock Message */}
             {product.quantity === 0 && (
               <p className="text-red-600 text-sm sm:text-base font-semibold mb-4">
-                ⚠️ This product is currently{" "}
+                This product is currently{" "}
                 <span className="underline">Out of Stock</span>.
               </p>
             )}
@@ -147,7 +147,7 @@ const ProductDetails = () => {
                   if (product.quantity > 0) {
                     navigate(`/confirmOrder/${product._id}`);
                   } else {
-                    toast.warn("⚠️ এই পণ্যটি স্টকে নেই!", {
+                    toast.warn("এই পণ্যটি স্টকে নেই!", {
                       position: "top-center",
                       autoClose: 3000,
                       hideProgressBar: false,

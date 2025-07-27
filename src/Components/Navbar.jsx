@@ -63,7 +63,7 @@ const Navbar = () => {
 
       {/* Mobile Topbar */}
       <div className="block md:hidden bg-white text-gray-800 text-sm px-4 pt-2 text-center border-b border-gray-200">
-        <p className="mt-2">Welcome to our GadgetzWorld!</p>
+        <p className="mt-2">Welcome to our Gadget'z World!</p>
         <div className="flex justify-center mt-2 space-x-4 text-xl">
           <a href="https://www.facebook.com/share/15wotKbrH7" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:text-blue-800" aria-label="Facebook">
             <FaFacebookF />
@@ -90,7 +90,7 @@ const Navbar = () => {
 
       {/* Desktop Topbar */}
       <div className="hidden md:flex bg-white text-gray-800 text-sm px-4 py-2 justify-between items-center">
-        <span>Welcome to our GadgetzWorld!</span>
+        <span>Welcome to our Gadget'z World!</span>
         <div className="space-x-4">
           <NavLink to="/track-order" className="hover:underline">Track Order</NavLink>
           <NavLink to="/about" className="hover:underline">About Us</NavLink>

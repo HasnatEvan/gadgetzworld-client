@@ -24,6 +24,8 @@ import AddBanner from "../pages/Admin/AddBanner/AddBanner";
 import Contact from "../pages/ContactPage/COntact";
 import AllUsers from "../pages/Admin/AllUsers/AllUsers";
 import AddMarquee from "../pages/Admin/AddMarquee/AddMarquee";
+import About from "../pages/About/About";
+import AllWishList from "../pages/Admin/AllWishList/AllWishList";
 
 
 
@@ -68,6 +70,10 @@ export const router = createBrowserRouter([
       {
         path: '/contact',
         element: <Contact></Contact>
+      },
+      {
+        path:'/about',
+        element:<About></About>
       }
     ],
   },
@@ -101,15 +107,19 @@ export const router = createBrowserRouter([
       },
       {
         path: '/dashboard/add-banner',
-        element: <AddBanner></AddBanner>
+        element:<PrivateRoute><AdminRoute></AdminRoute></PrivateRoute>
       },
       {
         path:'/dashboard/users',
-        element:<AllUsers></AllUsers>
+        element:<PrivateRoute><AdminRoute><AllUsers></AllUsers></AdminRoute></PrivateRoute>
       },
       {
         path:'/dashboard/marquee',
-        element:<AddMarquee></AddMarquee>
+        element:<PrivateRoute><AdminRoute><AddMarquee></AddMarquee></AdminRoute></PrivateRoute>
+      },
+      {
+        path:"/dashboard/all-wishlist",
+        element:<PrivateRoute><AdminRoute><AllWishList></AllWishList></AdminRoute></PrivateRoute>
       }
 
     ]
